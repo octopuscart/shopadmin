@@ -62,7 +62,7 @@ class Authentication extends CI_Controller {
                         'icon' => 'happy.png'
                     );
                     $this->session->set_flashdata("checklogin", $message);
-                    redirect('Order/index');
+                    redirect('ProductManager/productReport');
                 }
             } else {
                 $message = array(
