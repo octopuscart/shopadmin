@@ -24,7 +24,7 @@ define('product_image_base', $configuration['product_images_url']);
 define('EMAIL_SENDER', $configuration['email_sender']);
 define('EMAIL_SENDER_NAME', $configuration['email_sender_name']);
 define('EMAIL_BCC', $configuration['email_bcc']);
-define('EMAILCC', "jason@lordscustomtailors.com");
+
 
 
 

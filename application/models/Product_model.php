@@ -47,11 +47,9 @@ class Product_model extends CI_Model {
                 $pid = $row['id'];
                 $this->get_children($pid, $container);
             }
-
-            print_r($category);
             return $category;
         } else {
-            
+             return $category;
         }
     }
 
@@ -81,17 +79,15 @@ class Product_model extends CI_Model {
         return array('category_string' => $catstring, "category_array" => $catarray);
     }
 
-    function child($id) {
+    function child($id){
         $this->db->where('parent_id', $id);
         $query = $this->db->get('category');
         if ($query->num_rows() > 0) {
             foreach ($query->result_array() as $row) {
-
                 $cat[] = $row;
                 $cat[$row['id']] = $this->child($row['id']);
                 $cat[] = $row;
             }
-
             return $cat; //format the array into json data
         }
     }
