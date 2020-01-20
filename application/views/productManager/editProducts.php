@@ -168,8 +168,8 @@ $this->load->view('layout/topmenu');
                             <div class="form-group">
                                 <label >Product Availabilities</label>
                                 <select  name='stock_status' class='form-control'>
-                                    <option value='In Stock' >In Stock</option>
-                                    <option value='Out of Stock' >Out of Stock</option>
+                                    <option value='In Stock' <?php echo $product_obj->stock_status=='In Stock'?'selected':''; ?>>In Stock</option>
+                                    <option value='Out of Stock'  <?php echo $product_obj->stock_status=='Out of Stock'?'selected':''; ?>>Out of Stock</option>
                                 </select>
 
                             </div>

@@ -470,6 +470,7 @@ class ProductManager extends CI_Controller {
                 'sale_price' => $this->input->post('sale_price'),
                 'price' => $this->input->post('price'),
                 'status' => 1,
+                'stock_status'=>$this->input->post('stock_status')
             );
             $this->db->set($post_data);
 
