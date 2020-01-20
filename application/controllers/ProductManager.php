@@ -555,11 +555,11 @@ class ProductManager extends CI_Controller {
         $product_model = $this->Product_model;
         $data['product_model'] = $product_model;
 
-        $query = "select p.*, c.category_name from products as p join category as c on c.id = p.category_id  $searchqry  order by id desc ";
+        $query = "select p.* from products as p   $searchqry  order by id desc ";
         $query1 = $this->db->query($query);
         $productslistcount = $query1->result_array();
 
-        $query = "select p.*, c.category_name from products as p join category as c on c.id = p.category_id $searchqry  order by id desc limit  $start, $length";
+        $query = "select p.* from products as p $searchqry  order by id desc limit  $start, $length";
         $query2 = $this->db->query($query);
         $productslist = $query2->result_array();
 
