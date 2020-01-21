@@ -379,7 +379,25 @@ class ProductManager extends CI_Controller {
 
         $data['product_prices'] = "";
 
-
+        if (isset($_POST['removedata'])) {
+            $this->db->set('status', 0);
+            $this->db->where('id', $product_id); //set column_name and value in which row need to update
+            $this->db->update('products'); //
+            redirect("ProductManager/productReport");
+        }
+        
+        if (isset($_POST['recoverdata'])) {
+            $this->db->set('status', 1);
+            $this->db->where('id', $product_id); //set column_name and value in which row need to update
+            $this->db->update('products'); //
+            redirect("ProductManager/productReport");
+        }
+        
+        if (isset($_POST['deletedata'])) {
+            $this->db->where('id', $product_id); //set column_name and value in which row need to update
+            $this->db->delete('products'); //
+            redirect("ProductManager/productReport");
+        }
 
 
         //end of new attr
@@ -470,7 +488,7 @@ class ProductManager extends CI_Controller {
                 'sale_price' => $this->input->post('sale_price'),
                 'price' => $this->input->post('price'),
                 'status' => 1,
-                'stock_status'=>$this->input->post('stock_status')
+                'stock_status' => $this->input->post('stock_status')
             );
             $this->db->set($post_data);
 
@@ -534,13 +552,33 @@ class ProductManager extends CI_Controller {
     function productReport() {
         $product_model = $this->Product_model;
         $data['product_model'] = $product_model;
+        $data['condition'] = 'stockin';
+        $data['title'] = '';
+        $this->load->view('productManager/productReport', $data);
+    }
 
+    function productRemove($id) {
+        
+    }
 
+    function productReportStockOut() {
+        $product_model = $this->Product_model;
+        $data['product_model'] = $product_model;
+        $data['condition'] = 'stockout';
+        $data['title'] = 'Out Of Stock';
+        $this->load->view('productManager/productReport', $data);
+    }
+
+    function productReportTrash() {
+        $product_model = $this->Product_model;
+        $data['product_model'] = $product_model;
+        $data['condition'] = 'remove';
+        $data['title'] = 'Removed';
         $this->load->view('productManager/productReport', $data);
     }
 
     //Product API for data Table
-    public function productReportApi() {
+    public function productReportApi($condition) {
         $draw = intval($this->input->get("draw"));
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
@@ -549,18 +587,30 @@ class ProductManager extends CI_Controller {
 
         $search = $this->input->get("search")['value'];
         if ($search) {
-            $searchqry = " where p.title like '%$search%' ";
+            $searchqry = " and p.title like '%$search%' ";
+        }
+
+        $editionalquery = "where p.status = '1'";
+        switch ($condition) {
+            case "remove":
+                $editionalquery = " where p.status = '0' ";
+                break;
+            case "stockout":
+                $editionalquery = " where p.stock_status = 'Out of Stock' and p.status = '1'";
+                break;
+            default:
+                $editionalquery = " where p.stock_status = 'In Stock' and p.status = '1'";
         }
 
 
         $product_model = $this->Product_model;
         $data['product_model'] = $product_model;
 
-        $query = "select p.* from products as p   $searchqry  order by id desc ";
+        $query = "select p.* from products as p $editionalquery  $searchqry  order by id desc ";
         $query1 = $this->db->query($query);
         $productslistcount = $query1->result_array();
 
-        $query = "select p.* from products as p $searchqry  order by id desc limit  $start, $length";
+        $query = "select p.* from products as p $editionalquery $searchqry  order by id desc limit  $start, $length";
         $query2 = $this->db->query($query);
         $productslist = $query2->result_array();
 
@@ -585,8 +635,8 @@ class ProductManager extends CI_Controller {
             $temparray['short_description'] = $pvalue['short_description'];
             $catarray = $this->Product_model->parent_get($pvalue['category_id']);
             $temparray['category'] = $catarray['category_string'];
-            $temparray['edit'] = "";
             $temparray['items_prices'] = $pvalue['price'];
+            $temparray['stock_status'] = $pvalue['stock_status'];
             $temparray['edit'] = '<a href="' . site_url('ProductManager/edit_product/' . $pvalue['id']) . '" class="btn btn-danger"><i class="fa fa-edit"></i> Edit</a>';
 
             array_push($return_array, $temparray);

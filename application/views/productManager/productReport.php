@@ -47,7 +47,7 @@ $this->load->view('layout/topmenu');
 
         <div class="panel panel-inverse">
             <div class="panel-heading">
-                <h3 class="panel-title">Product Reports</h3>
+                <h3 class="panel-title">Product Reports <?php echo $title;?></h3>
             </div>
             <div class="panel-body">
                 <table id="tableData" class="table table-bordered ">
@@ -62,6 +62,7 @@ $this->load->view('layout/topmenu');
                             <th style="width:200px;">Short Description</th>
 
                             <th style="width:50px;">Items Prices</th>
+                            <th style="width:50px;">Stock</th>
 
                             <th style="width: 75px;">Edit</th>
                         </tr>
@@ -88,25 +89,24 @@ $this->load->view('layout/footer');
 <script>
     $(function () {
 
-    $('#tableData').DataTable({
-    "processing": true,
+        $('#tableData').DataTable({
+            "processing": true,
             "serverSide": true,
             "ajax": {
-            url: "<?php echo site_url("ProductManager/productReportApi") ?>",
-                    type: 'GET'
+                url: "<?php echo site_url("ProductManager/productReportApi/".$condition) ?>",
+                type: 'GET'
             },
             "columns": [
-            {"data": "s_n"},
-            {"data": "image"},
-            {"data": "category"},
-            {"data": "sku"},
-            {"data": "title"},
-            {"data": 'short_description'},
-
-                {"data": "items_prices"}, 
-
-            {"data": "edit"}]
-    })
+                {"data": "s_n"},
+                {"data": "image"},
+                {"data": "category"},
+                {"data": "sku"},
+                {"data": "title"},
+                {"data": 'short_description'},
+                {"data": "items_prices"},
+                {"data": "stock_status"},
+                {"data": "edit"}]
+        })
     }
     )
 

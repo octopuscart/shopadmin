@@ -88,7 +88,7 @@ $this->load->view('layout/topmenu');
                                 <?php
                                 if ($product_obj->file_name) {
                                     ?>
-                                    <div class="product_image product_image_back" style="background: url(<?php echo (base_url() . "assets/product_images/".$product_obj->file_name); ?>)">
+                                    <div class="product_image product_image_back" style="background: url(<?php echo (base_url() . "assets/product_images/" . $product_obj->file_name); ?>)">
                                     </div>
                                     <?php
                                 } else {
@@ -114,10 +114,10 @@ $this->load->view('layout/topmenu');
 
                         <div class="col-md-3">                           
                             <div class="thumbnail" >
-                                 <?php
+                                <?php
                                 if ($product_obj->file_name1) {
                                     ?>
-                                    <div class="product_image product_image_back" style="background: url(<?php echo (base_url() . "assets/product_images/".$product_obj->file_name1); ?>)">
+                                    <div class="product_image product_image_back" style="background: url(<?php echo (base_url() . "assets/product_images/" . $product_obj->file_name1); ?>)">
                                     </div>
                                     <?php
                                 } else {
@@ -141,7 +141,7 @@ $this->load->view('layout/topmenu');
                                 <?php
                                 if ($product_obj->file_name2) {
                                     ?>
-                                    <div class="product_image product_image_back" style="background: url(<?php echo (base_url() . "assets/product_images/".$product_obj->file_name2); ?>)">
+                                    <div class="product_image product_image_back" style="background: url(<?php echo (base_url() . "assets/product_images/" . $product_obj->file_name2); ?>)">
                                     </div>
                                     <?php
                                 } else {
@@ -168,8 +168,8 @@ $this->load->view('layout/topmenu');
                             <div class="form-group">
                                 <label >Product Availabilities</label>
                                 <select  name='stock_status' class='form-control'>
-                                    <option value='In Stock' <?php echo $product_obj->stock_status=='In Stock'?'selected':''; ?>>In Stock</option>
-                                    <option value='Out of Stock'  <?php echo $product_obj->stock_status=='Out of Stock'?'selected':''; ?>>Out of Stock</option>
+                                    <option value='In Stock' <?php echo $product_obj->stock_status == 'In Stock' ? 'selected' : ''; ?>>In Stock</option>
+                                    <option value='Out of Stock'  <?php echo $product_obj->stock_status == 'Out of Stock' ? 'selected' : ''; ?>>Out of Stock</option>
                                 </select>
 
                             </div>
@@ -182,6 +182,21 @@ $this->load->view('layout/topmenu');
 
 
                     <button type="submit" name="editdata" class="btn btn-primary">Submit</button>
+                    <?php
+                    if ($product_obj->status == 1) {
+                        ?>
+                        <button type="submit" name="removedata" class="btn btn-danger">Remove</button>
+                        <?php
+                    }
+                    ?>
+                    <?php
+                    if ($product_obj->status == 0) {
+                        ?>
+                        <button type="submit" name="recoverdata" class="btn btn-warning">Recover</button>
+                         <button type="submit" name="deletedata" class="btn btn-danger">Delete</button>
+                        <?php
+                    }
+                    ?>
                 </form>
             </div>
         </div>

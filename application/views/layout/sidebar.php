@@ -15,6 +15,9 @@ $product_menu = array(
         "Add Product" => site_url("ProductManager/add_product"),
         "Product Reports" => site_url("ProductManager/productReport"),
         "Categories" => site_url("ProductManager/categories"),
+        "Product Out Of Stock" => site_url("ProductManager/productReportStockOut"),
+        "Product Removed" => site_url("ProductManager/productReportTrash"),
+        
 //        "Items Prices" => site_url("ProductManager/categoryItems"),
 //        "Product Sorting" => site_url("ProductManager/productSorting"),
 //        "Product Colors" => site_url("ProductManager/productColors"),
