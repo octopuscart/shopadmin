@@ -45,7 +45,7 @@ class Api extends REST_Controller {
     //Login Function 
     //function for product list
     function loginOperation_post() {
-        $email = $this->post('email');
+        $email = $this->post('contact_no');
         $password = $this->post('password');
         $this->db->select('au.id,au.first_name,au.last_name,au.email,au.contact_no');
         $this->db->from('admin_users au');
