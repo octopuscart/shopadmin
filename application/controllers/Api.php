@@ -49,7 +49,7 @@ class Api extends REST_Controller {
         $password = $this->post('password');
         $this->db->select('au.id,au.first_name,au.last_name,au.email,au.contact_no');
         $this->db->from('admin_users au');
-        $this->db->where('email', $email);
+        $this->db->where('contact_no', $email);
         $this->db->where('password', md5($password));
         $this->db->limit(1);
         $query = $this->db->get();
