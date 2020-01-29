@@ -201,7 +201,7 @@ class Api extends REST_Controller {
         $this->config->load('rest', TRUE);
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        $email = $this->post('email');
+        $email = $this->post('contact_no');
         $password = $this->post('password');
         $regArray = array(
             "email" => $email,
