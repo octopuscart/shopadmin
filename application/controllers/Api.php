@@ -117,7 +117,7 @@ class Api extends REST_Controller {
             'order_time' => date("H:i:s a"),
             'total_quantity' => $this->post('quantity'),
             'total_price' => $this->post('total'),
-            'payment_mode' => "COD",
+            'payment_mode' => $this->post('payment_method'),
             'status' => "Processing",
             'user_id' => $this->post('user_id'),
             'order_key' => $this->post('user_id'),
@@ -139,31 +139,31 @@ class Api extends REST_Controller {
             'c_time' => date('H:i:s'),
             'order_id' => $last_id,
             'status' => "Order Confirmed",
-            'user_id' =>$this->post('user_id'),
+            'user_id' => $this->post('user_id'),
             'remark' => "Order Confirmed By Using COD,  Waiting For Payment",
         );
         $this->db->insert('user_order_status', $order_status_data);
 
         foreach ($cartjson as $key => $value) {
-           
-            
-            
+
+
+
             $product_dict = array(
                 'title' => $value->title,
                 'price' => $value->price,
-                'sku' =>  $value->sku,
+                'sku' => $value->sku,
                 'attrs' => "",
-                'vendor_id' =>  "",
-                'total_price' =>  $value->total_price,
-                'file_name' =>   base_url().'assets/product_images/' .  $value->file_name,
-                'quantity' =>  $value->quantity,
-                'user_id' =>  $value->title,
-                'credit_limit' =>  0,
-                'order_id'=>$last_id,
+                'vendor_id' => "",
+                'total_price' => $value->total_price,
+                'file_name' => base_url() . 'assets/product_images/' . $value->file_name,
+                'quantity' => $value->quantity,
+                'user_id' => $value->title,
+                'credit_limit' => 0,
+                'order_id' => $last_id,
                 'product_id' => $this->post('user_id'),
                 'op_date_time' => date('Y-m-d H:i:s'),
             );
-            
+
             $this->db->insert('cart', $product_dict);
         }
         $this->response(array("order_id" => $oderid));
@@ -207,7 +207,7 @@ class Api extends REST_Controller {
             "email" => $email,
             "password" => $password,
         );
-        $this->db->where('email', $email);
+        $this->db->where('contact_no', $email);
         $this->db->where('password', $password);
         $query = $this->db->get('app_user');
         $userdata = $query->row();
@@ -301,6 +301,13 @@ class Api extends REST_Controller {
         $this->response($galleryList);
     }
 
+    function productCategoryAll_get() {
+        $this->config->load('rest', TRUE);
+        $query = $this->db->get("category");
+        $galleryList = $query->result();
+        $this->response($galleryList);
+    }
+
     function productCategory_get($category_id) {
         $this->config->load('rest', TRUE);
         $categorieslist = $this->Product_model->get_children($category_id, array());
@@ -331,13 +338,71 @@ class Api extends REST_Controller {
         $this->response($catelist);
     }
 
+    function productListSearch_get() {
+        $this->config->load('rest', TRUE);
+        $search = $this->get('search');
+        $this->db->where("title like '%$search%'");
+        $this->db->where("status", '1');
+//        $this->db->where_in("stock_status", 'In Stock');
+        $query = $this->db->get("products");
+        $productlist = $query->result();
+        $this->response($productlist);
+    }
+
     function productList_get($categoryid) {
         $this->config->load('rest', TRUE);
         $categoriesString = $this->Product_model->stringCategories($categoryid);
         $categoriesString = ltrim($categoriesString, ", ");
         $categorylist = explode(", ", $categoriesString);
+        if ($categoriesString) {
+            $categorylist = $categorylist;
+        } else {
+            $categorylist = [];
+        }
         array_push($categorylist, $categoryid);
         $this->db->where_in("category_id", $categorylist);
+        $this->db->where("status", '1');
+//        $this->db->where_in("stock_status", 'In Stock');
+        $query = $this->db->get("products");
+        $productlist = $query->result();
+        $this->response($productlist);
+    }
+
+    function productListOffers_get($categoryid) {
+        $this->config->load('rest', TRUE);
+        $categoriesString = $this->Product_model->stringCategories($categoryid);
+        $categoriesString = ltrim($categoriesString, ", ");
+        $categorylist = explode(", ", $categoriesString);
+        if ($categoriesString) {
+            $categorylist = $categorylist;
+        } else {
+            $categorylist = [];
+        }
+        array_push($categorylist, $categoryid);
+        $this->db->where_in("category_id", $categorylist);
+        $this->db->where("status", '1');
+        $this->db->where("offer", '1');
+//        $this->db->where_in("stock_status", 'In Stock');
+        $query = $this->db->get("products");
+        $productlist = $query->result();
+        $this->response($productlist);
+    }
+
+    function productListOffersFront_get($categoryid) {
+        $this->config->load('rest', TRUE);
+        $categoriesString = $this->Product_model->stringCategories($categoryid);
+        $categoriesString = ltrim($categoriesString, ", ");
+        $categorylist = explode(", ", $categoriesString);
+        if ($categoriesString) {
+            $categorylist = $categorylist;
+        } else {
+            $categorylist = [];
+        }
+        array_push($categorylist, $categoryid);
+        $this->db->where_in("category_id", $categorylist);
+        $this->db->where("status", '1');
+        $this->db->where("offer", '1');
+        $this->db->limit(10);
         $query = $this->db->get("products");
         $productlist = $query->result();
         $this->response($productlist);

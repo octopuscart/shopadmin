@@ -164,6 +164,14 @@ $this->load->view('layout/topmenu');
 
                     <!--product availabilities-->
                     <div class='row'>
+                        <div class="form-group">
+                            <label >Show In Offers</label>
+                            <select  name='offer' class='form-control'>
+                                <option value='1' <?php echo $product_obj->offer == '1' ? 'selected' : ''; ?>>Yes</option>
+                                <option value='0' <?php echo $product_obj->offer == '0' ? 'selected' : ''; ?>>No</option>
+                            </select>
+
+                        </div>
                         <div class="col-md-3">                           
                             <div class="form-group">
                                 <label >Product Availabilities</label>
@@ -193,7 +201,7 @@ $this->load->view('layout/topmenu');
                     if ($product_obj->status == 0) {
                         ?>
                         <button type="submit" name="recoverdata" class="btn btn-warning">Recover</button>
-                         <button type="submit" name="deletedata" class="btn btn-danger">Delete</button>
+                        <button type="submit" name="deletedata" class="btn btn-danger">Delete</button>
                         <?php
                     }
                     ?>

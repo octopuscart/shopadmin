@@ -319,6 +319,7 @@ class ProductManager extends CI_Controller {
                 'sale_price' => $this->input->post('sale_price'),
                 'price' => $this->input->post('price'),
                 'file_name' => $file_newname,
+                'offer'=> $this->input->post('offer'),
                 'file_name1' => "",
                 'file_name2' => "",
                 'status' => 1,
@@ -487,6 +488,7 @@ class ProductManager extends CI_Controller {
                 'regular_price' => $this->input->post('regular_price'),
                 'sale_price' => $this->input->post('sale_price'),
                 'price' => $this->input->post('price'),
+                'offer'=>$this->input->post('offer'),
                 'status' => 1,
                 'stock_status' => $this->input->post('stock_status')
             );

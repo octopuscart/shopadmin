@@ -1,6 +1,7 @@
 <?php
 $this->load->view('layout/header');
-$this->load->view('layout/topmenu');?>
+$this->load->view('layout/topmenu');
+?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/treejs/themes/default/style.min.css">
 
 <script src="<?php echo base_url(); ?>assets/treejs/jstree.min.js"></script>
@@ -25,8 +26,8 @@ $this->load->view('layout/topmenu');?>
                 <h3 class="panel-title">Add Product</h3>
             </div>
             <div class="panel-body">
-                
-             
+
+
 
                 <?php echo $this->session->flashdata('success_msg'); ?>
                 <?php echo $this->session->flashdata('error_msg'); ?>
@@ -76,7 +77,7 @@ $this->load->view('layout/topmenu');?>
                             </div>
                         </div>
 
-                       
+
                     </div>
                     <!--end of price-->
 
@@ -102,49 +103,62 @@ $this->load->view('layout/topmenu');?>
 
                     <!--product availabilities-->
                     <div class='row'>
-                        <div class="col-md-3">                           
-                            <div class="form-group">
-                                <label >Product Availabilities</label>
-                                <select  name='stock_status' class='form-control'>
-                                    <option value='In Stock' >In Stock</option>
-                                    <option value='Out of Stock' >Out of Stock</option>
-                                </select>
+                        
 
-                            </div>
+
+
+                        <div class="form-group">
+                            <label >Show In Offers</label>
+                            <select  name='offer' class='form-control'>
+                                <option value='1' >Yes</option>
+                                <option value='0' >No</option>
+                            </select>
+
+                        </div>
+                    </div> 
+                    <div class="col-md-3">                           
+                        <div class="form-group">
+                            <label >Product Availabilities</label>
+                            <select  name='stock_status' class='form-control'>
+                                <option value='In Stock' >In Stock</option>
+                                <option value='Out of Stock' >Out of Stock</option>
+                            </select>
+
                         </div>
                     </div>
-
-
-
-
-               
-
-                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                </form>
             </div>
-        </div>
 
 
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade categoryopen" id="category_model">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Select Category</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="using_json_2" class="demo">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+
+
+
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade categoryopen" id="category_model">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Select Category</h4>
+            </div>
+            <div class="modal-body">
+                <div id="using_json_2" class="demo">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </section>
 <!-- end col-6 -->
@@ -172,14 +186,12 @@ $this->load->view('layout/footer');
                                         if (rprice > sprice) {
                                             $("#finalprice").text(sprice);
                                             $("#finalprice1").val(sprice);
-                                        }
-                                        else {
+                                        } else {
                                             $("#finalprice").text(rprice);
                                             $("#finalprice1").val(rprice);
                                             $("#sale_price").val(0)
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         $("#finalprice").text(rprice);
                                         $("#finalprice1").val(rprice);
                                         $("#sale_price").val(0)
@@ -191,8 +203,8 @@ $this->load->view('layout/footer');
 
 <script>
     Admin.controller('productController', function ($scope, $http, $filter, $timeout) {
-        $scope.selectedCategory = {'category_string': '<?php echo $default_category->category_name;?>', 'category_id': "<?php echo $default_category->id;?>"};
-        
+        $scope.selectedCategory = {'category_string': '<?php echo $default_category->category_name; ?>', 'category_id': "<?php echo $default_category->id; ?>"};
+
         var url = "<?php echo base_url(); ?>index.php/ProductManager/category_api";
         $http.get(url).then(function (rdata) {
             $scope.categorydata = rdata.data;
