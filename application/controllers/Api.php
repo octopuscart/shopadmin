@@ -119,8 +119,8 @@ class Api extends REST_Controller {
             'total_price' => $this->post('total'),
             'payment_mode' => $this->post('payment_method'),
             'status' => "Processing",
-            'user_id' => $this->post('user_id'),
-            'order_key' => $this->post('user_id'),
+            'user_id' => $this->post('user_id') ? $this->post('user_id') :'Guest',
+            'order_key' => $this->post('user_id') ? $this->post('user_id') :'Guest',
         );
         $this->db->insert('user_order', $web_order);
 

@@ -70,12 +70,7 @@
 <div class="invoice" style='margin-top:20px;'>
     <div class="invoice-company">
         <span class="pull-right hidden-print">
-            <a class="btn btn-success  btn-sm m-b-10"
-               href="<?php echo site_url("order/order_mail_send_direct/" . $ordersdetails['order_data']->order_key) ?>"><i
-                    class="fa fa-envelope"></i> Send Current Status Mail</a>
-            <a class="btn btn-success btn-sm m-b-10"
-               href="<?php echo site_url("order/order_pdf_worker/" . $ordersdetails['order_data']->id) ?>"><i
-                    class="fa fa-cogs "></i> Worker Report</a>
+            
             <a class="btn btn-success btn-sm m-b-10"
                href="<?php echo site_url("order/order_pdf/" . $ordersdetails['order_data']->id) ?>"><i
                     class="fa fa-download "></i> Order PDF</a>
@@ -92,13 +87,9 @@
                     <?php echo $ordersdetails['order_data']->name; ?>
                 </strong> <br />
                 <div style="    padding: 5px 0px;">
-                    <?php echo $ordersdetails['order_data']->address1; ?><br />
-                    <?php echo $ordersdetails['order_data']->address2; ?><br />
-                    <?php echo $ordersdetails['order_data']->state; ?>
-                    <?php echo $ordersdetails['order_data']->city; ?>
-
-                    <?php echo $ordersdetails['order_data']->country; ?>
-                    <?php echo $ordersdetails['order_data']->zipcode; ?>
+                    <?php echo $ordersdetails['order_data']->address; ?><br />
+    
+                    <?php echo $ordersdetails['order_data']->pincode; ?>
 
                 </div>
                 <table class="gn_table">
@@ -151,13 +142,7 @@
             </address>
         </div>
         <div class="invoice-date">
-            <small>Invoice /
-                <?php echo date_format(date_create($ordersdetails['order_data']->order_date . ' ' . $ordersdetails['order_data']->order_time), "F"); ?>
-
-                period</small>
-            <div class="date m-t-5">
-                <?php echo date_format(date_create($ordersdetails['order_data']->order_date . ' ' . $ordersdetails['order_data']->order_time), "l, d F Y"); ?>
-            </div>
+            
             <div class="invoice-detail">
                 #<?php echo $ordersdetails['order_data']->order_no; ?><br>
 
@@ -194,35 +179,13 @@
 
                     <td style="width: 300px;">
 
-                        <?php echo $product->title; ?> - <?php echo $product->item_name; ?>
+                        <?php echo $product->title; ?> 
                         <br />
                         <small style="font-size: 15px;">(<?php echo $product->sku; ?>)</small>
 
 
-                        <div class="panel-group" id="accordion" style="width:350px;">
-                            <div class="panel panel-default overflow-hidden">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">
-                                        <a class="accordion-toggle accordion-toggle-styled collapsed"
-                                           data-toggle="collapse" data-parent="#accordion" href="#collapseStyle">
-                                            <i class="fa fa-plus-circle pull-right"></i>
-                                            View Style Summary
-                                        </a>
-                                    </h3>
-                                </div>
-                                <div id="collapseStyle" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <?php
-                                        echo "<ul class='list-group'>";
-                                        foreach ($product->custom_dict as $key => $value) {
-                                            echo "<li class='list-group-item'>$key <span class='badge'>$value</span></li>";
-                                        }
-                                        echo "</ul>";
-                                        ?> </div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
+                  
+                    
 
 
 
@@ -260,40 +223,7 @@
 
                 </tbody>
                 <tfoot class="invoice-header">
-                    <tr>
-                        <td colspan="7">
-                            Measurement Type:
-                            <?php
-                            echo $ordersdetails['order_data']->measurement_style;
-                            if (count($ordersdetails['measurements_items'])) {
-                                ?>
-                                <a role="button" class="btn btn-xs btn-default" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapsemeasurements" aria-expanded="true" aria-controls="collapseOne">
-                                    View Measurement
-                                </a>
-                                <div id="collapsemeasurements" class="panel-collapse collapse " role="tabpanel"
-                                     aria-labelledby="headingOne">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="panel-body" style="padding:10px 0px;">
-                                                <?php
-                                                echo "<ul class='list-group'>";
-                                                foreach ($ordersdetails['measurements_items'] as $keym => $valuem) {
-                                                    $mvalues = explode(" ", $valuem['measurement_value']);
-                                                    echo "<li class='list-group-item'>" . $valuem['measurement_key'] . " <span class='measurement_right_text'><span class='measurement_text'>" . $mvalues[0] . "</span><span class='fr_value'>" . $mvalues[1] . '"' . "</span></span></li>";
-                                                }
-                                                echo "</ul>";
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                                <?php
-                            }
-                            ?>
-                        </td>
-                    </tr>
+
 
                     <!--end of cart details-->
                     <tr>
@@ -359,21 +289,11 @@
 
                     <tr>
                         <td colspan="3" rowspan="4" style="font-size: 12px">
-                            <b>Total Amount in Words:</b><br />
-                            <span style="text-transform: capitalize">
-                                <span style="text-transform: capitalize">
-                                    <?php echo $ordersdetails['order_data']->amount_in_word; ?></span>
-
-                            </span>
+                           
                         </td>
 
                     </tr>
-                    <tr class="invoice_footer">
-                        <td class="" colspan="2" style="text-align: right">Sub Total</td>
-                        <td style="text-align: right;width: 60px">
-                            {{"<?php echo $ordersdetails['order_data']->sub_total_price; ?>"|currency:"<?php echo GLOBAL_CURRENCY; ?>"}}
-                        </td>
-                    </tr>
+                    
                     <!--                                <tr>
                                         <td colspan="2" style="text-align: right">Credit Used</td>
                                         <td style="text-align: right;width: 60px"><?php echo $ordersdetails['order_data']->credit_price; ?> </td>

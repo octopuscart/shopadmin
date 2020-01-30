@@ -54,8 +54,8 @@ $this->load->view('layout/topmenu');
                                 <th style="width: 70px">S. No.</th>
                                 <th style="width:250px">Order Information</th>
                                 <th style="width:200px">Customer Information</th>
-                                <th style="width:80px">Items/Qnty.</th>
-                                <th style="width:100px">Sizes</th>
+                                <th style="width:80px">Shipping Address</th>
+                                <th style="width:100px">Payment Type</th>
                                 <th>Status</th>
                                 <th></th>
 
@@ -72,62 +72,60 @@ $this->load->view('layout/topmenu');
                                             <?php echo $count; ?>
                                         </td>
                                         <td>
-                                      
-                                                <table class="small_table">
-                                                    <tr>
-                                                        <th>Order No.</th>
-                                                        <td>: <?php echo $value->order_no; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Total Amount</th>
-                                                        <td>: {{<?php  echo $value->total_price; ?>|currency:" "}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Total Products</th>
-                                                        <td>: {{<?php echo $value->total_quantity; ?>}}</td>
-                                                    </tr>
-                                                </table>
-                                        
-                                        </td>
 
-                                        <td>
-                                           
-                                                <b> <?php echo $value->name; ?></b>
-                                                <table class="small_table">
-                                                    <tr>
-                                                        <th><i class="fa fa-envelope"></i> &nbsp; </th>
-                                                        <td class="overtext"> <a href="#" title="<?php echo $value->email; ?>"><?php echo $value->email; ?></a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th><i class="fa fa-phone"></i>  &nbsp;</th>
-                                                        <td> <?php echo $value->contact_no; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th><i class="fa fa-map-marker"></i> &nbsp; </th>
-                                                        <td> <?php echo $value->city . ", " . $value->country; ?></td>
-                                                    </tr>
-                                                </table>
-                                          
-                                        </td>
-                                        
-
-                                        <td>
                                             <table class="small_table">
-                                                <?php
-                                                $items = $value->itemsarray;
-                                                foreach ($items as $k => $v) {
-                                                    echo "<tr><th>$k</th><td>: $v</td></tr>";
-                                                }
-                                                ?>
+                                                <tr>
+                                                    <th>Order No.</th>
+                                                    <td>: <?php echo $value->order_no; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Total Amount</th>
+                                                    <td>: {{<?php echo $value->total_price; ?>|currency:" "}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Total Products</th>
+                                                    <td>: {{<?php echo $value->total_quantity; ?>}}</td>
+                                                </tr>
                                             </table>
+
                                         </td>
-<td>
-                                         
-                                                <?php
-                                                echo $value->measurement_style;
-                                                ?>
-                                          
+
+                                        <td>
+
+                                            <b> <?php echo $value->name; ?></b>
+                                            <table class="small_table">
+                                                <tr>
+                                                    <th><i class="fa fa-envelope"></i> &nbsp; </th>
+                                                    <td class="overtext"> <a href="#" title="<?php echo $value->email; ?>"><?php echo $value->email; ?></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th><i class="fa fa-phone"></i>  &nbsp;</th>
+                                                    <td> <?php echo $value->contact_no; ?></td>
+                                                </tr>
+                                                
+                                            </table>
+
                                         </td>
+                                        <td>
+
+                                            <b> <?php echo $value->address; ?></b>
+                                            <table class="small_table">
+
+                                                <tr>
+                                                    <th><i class="fa fa-map-marker"></i> &nbsp; </th>
+                                                    <td> <?php echo $value->pincode; ?></td>
+                                                </tr>
+                                            </table>
+
+                                        </td>
+
+
+                                        <td>
+                                            <?php
+                                            echo $value->payment_mode;
+                                            ?>
+                                        </td>
+                                     
                                         <td>
                                             <?php
                                             echo "" . $value->status . "<br/>";
@@ -135,7 +133,7 @@ $this->load->view('layout/topmenu');
                                             ?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo site_url("order/orderdetails/".$value->order_key);?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
+                                            <a href="<?php echo site_url("order/orderdetails/" . $value->order_key); ?>" class="btn btn-primary btn-sm" style="    margin-top: 20%;">Update <i class="fa fa-arrow-circle-right"></i></a>
                                         </td>
                                     </tr>
                                     <?php

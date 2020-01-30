@@ -71,12 +71,7 @@ class Order extends CI_Controller {
             $cartdata = $query->result();
             $tempdata = array();
             $itemarray = array();
-            foreach ($cartdata as $key1 => $value1) {
-                array_push($tempdata, $value1->item_name . "(" . $value1->quantity . ")");
-                $itemarray[$value1->item_name] = $value1->quantity;
-            }
-            $value->itemsarray = $itemarray;
-            $value->items = implode(", ", $tempdata);
+          
             array_push($orderslistr, $value);
         }
         $data['orderslist'] = $orderslistr;
@@ -557,12 +552,7 @@ class Order extends CI_Controller {
                 $cartdata = $query->result();
                 $tempdata = array();
                 $itemarray = array();
-                foreach ($cartdata as $key1 => $value1) {
-                    array_push($tempdata, $value1->item_name . "(" . $value1->quantity . ")");
-                    $itemarray[$value1->item_name] = $value1->quantity;
-                }
-                $value->itemsarray = $itemarray;
-                $value->items = implode(", ", $tempdata);
+
                 array_push($orderslistr, $value);
             }
             $data['orderslist'] = $orderslistr;
