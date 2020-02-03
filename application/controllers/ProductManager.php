@@ -323,6 +323,7 @@ class ProductManager extends CI_Controller {
                 'file_name1' => "",
                 'file_name2' => "",
                 'status' => 1,
+                'stock_status'=>'In Stock',
                 'op_date_time' => $datetime,
                 'user_id' => $user_id);
 
