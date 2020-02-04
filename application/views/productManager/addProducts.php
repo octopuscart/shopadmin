@@ -87,12 +87,12 @@ $this->load->view('layout/topmenu');
                     <div class="row">
                         <div class="col-md-3">
                             <div class="thumbnail">
-                                <div class="product_image product_image_back" style="background: url(<?php echo (base_url() . "assets/default/default.png"); ?>)">
-                                </div>
+                              
+                                <img src="<?php echo (base_url() . "assets/default/default.png");?>" style="    width: 100%;">
                                 <div class="caption">
                                     <div class="form-group">
                                         <label for="image1">Upload Primary Image</label>
-                                        <input type="file" name="picture" required="" />           
+                                        <input type="file" name="picture" file-model="filename" required="" />           
                                     </div>
                                 </div>
                             </div>
@@ -103,62 +103,62 @@ $this->load->view('layout/topmenu');
 
                     <!--product availabilities-->
                     <div class='row'>
-                        
 
 
-
-                        <div class="form-group">
-                            <label >Show In Offers</label>
-                            <select  name='offer' class='form-control'>
-                                <option value='1' >Yes</option>
-                                <option value='0' >No</option>
-                            </select>
-
+                        <div class="col-md-3">  
+                            <div class="form-group">
+                                <label >Show In Offers</label>
+                                <select  name='offer' class='form-control'>
+                                    <option value='1' >Yes</option>
+                                    <option value='0' >No</option>
+                                </select>
+                            </div>
                         </div>
-                    </div> 
-                    <div class="col-md-3">                           
-                        <div class="form-group">
-                            <label >Product Availabilities</label>
-                            <select  name='stock_status' class='form-control'>
-                                <option value='In Stock' >In Stock</option>
-                                <option value='Out of Stock' >Out of Stock</option>
-                            </select>
 
+                        <div class="col-md-3">                           
+                            <div class="form-group">
+                                <label >Product Availabilities</label>
+                                <select  name='stock_status' class='form-control'>
+                                    <option value='In Stock' >In Stock</option>
+                                    <option value='Out of Stock' >Out of Stock</option>
+                                </select>
+
+                            </div>
                         </div>
+
                     </div>
+
+
+
+
+
+
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
-
-
-
-
-
-
-            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-            </form>
         </div>
+
+
     </div>
 
-
-</div>
-
-<!-- Modal -->
-<div class="modal fade categoryopen" id="category_model">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Select Category</h4>
-            </div>
-            <div class="modal-body">
-                <div id="using_json_2" class="demo">
+    <!-- Modal -->
+    <div class="modal fade categoryopen" id="category_model">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Select Category</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="using_json_2" class="demo">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
         </div>
     </div>
-</div>
 
 </section>
 <!-- end col-6 -->
@@ -215,7 +215,7 @@ $this->load->view('layout/footer');
 
             $('#using_json_2').bind('ready.jstree', function (e, data) {
                 $timeout(function () {
-                    $scope.getCategoryString(4);
+                    $scope.getCategoryString(1);
                 }, 100);
             })
         });

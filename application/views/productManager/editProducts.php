@@ -19,8 +19,11 @@ $this->load->view('layout/topmenu');
 </style>
 <!-- Main content -->
 <section class="content" ng-controller="productController">
-    <div class="">
+    <div class="well well-sm">
+                <a class="btn btn-success btn-lg" href="<?php echo site_url('ProductManager/add_product')?>">Add New Product</a>
 
+    </div>
+    <div class="">
         <div class="panel panel-inverse">
             <div class="panel-heading">
                 <h3 class="panel-title">Edit Product</h3>
@@ -164,13 +167,15 @@ $this->load->view('layout/topmenu');
 
                     <!--product availabilities-->
                     <div class='row'>
-                        <div class="form-group">
-                            <label >Show In Offers</label>
-                            <select  name='offer' class='form-control'>
-                                <option value='1' <?php echo $product_obj->offer == '1' ? 'selected' : ''; ?>>Yes</option>
-                                <option value='0' <?php echo $product_obj->offer == '0' ? 'selected' : ''; ?>>No</option>
-                            </select>
+                        <div class="col-md-3">    
+                            <div class="form-group">
+                                <label >Show In Offers</label>
+                                <select  name='offer' class='form-control'>
+                                    <option value='1' <?php echo $product_obj->offer == '1' ? 'selected' : ''; ?>>Yes</option>
+                                    <option value='0' <?php echo $product_obj->offer == '0' ? 'selected' : ''; ?>>No</option>
+                                </select>
 
+                            </div>
                         </div>
                         <div class="col-md-3">                           
                             <div class="form-group">
