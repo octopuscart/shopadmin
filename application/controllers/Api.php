@@ -139,7 +139,7 @@ class Api extends REST_Controller {
             'c_time' => date('H:i:s'),
             'order_id' => $last_id,
             'status' => "Order Confirmed",
-            'user_id' => $this->post('user_id'),$this->post('user_id') ? $this->post('user_id') :'Guest',
+            'user_id' => $this->post('user_id') ? $this->post('user_id') :'Guest',
             'remark' => "Order Confirmed By Using COD,  Waiting For Payment",
         );
         $this->db->insert('user_order_status', $order_status_data);
