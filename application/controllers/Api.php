@@ -160,7 +160,7 @@ class Api extends REST_Controller {
                 'user_id' => $value->title,
                 'credit_limit' => 0,
                 'order_id' => $last_id,
-                'product_id' => $this->post('user_id'),
+                'product_id' => '',
                 'op_date_time' => date('Y-m-d H:i:s'),
             );
 
