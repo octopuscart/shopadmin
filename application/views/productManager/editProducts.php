@@ -46,7 +46,7 @@ $this->load->view('layout/topmenu');
                         <span class='categorystring'>{{selectedCategory.category_string}}</span>
                         <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".categoryopen" style="margin-left: 21px;">Select Category</button>
 
-                        <input type="hidden" name="category_name" id="category_id">
+                        <input type="hidden" name="category_name" id="category_id" value="<?php echo $product_obj->category_id; ?>">
 
                     </div>
                     <div class="form-group">
@@ -321,6 +321,7 @@ $this->load->view('layout/footer');
 
         $(document).on("click", "[selectcategory]", function (event) {
             var catid = $(this).attr("selectcategory");
+            $("#category_model").modal("hide");
             $scope.getCategoryString(catid);
         })
 
