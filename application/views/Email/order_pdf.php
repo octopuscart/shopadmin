@@ -5,8 +5,8 @@ echo PDF_HEADER;
 <table class="detailstable" align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #fff;margin-top:20px;">
     <tr>
         <td style="width: 50%" >
-            <div style="float:left;width: 300px;height: 200px">
-                <b>Shipping Address</b><br/>
+            <div style="float:left;width: 300px;height: 250px">
+                <b style="width: 100%;height: 50px;float: left;">Shipping Address</b><br/>
 
                 <table class="gn_table" style="border-top: 1px solid;margin-top: 5px; ">
                     <tr>
@@ -14,7 +14,7 @@ echo PDF_HEADER;
                             <span style="text-transform: capitalize;margin-top: 10px;"> 
                                 <?php echo $order_data->name; ?>
                             </span> <br/>
-                            <div style="    padding: 5px 0px;">
+                            <div style="    padding: 5px 0px;font-size: 10px;">
                                 <?php echo $order_data->address1; ?><br/>
                                 <?php echo $order_data->address2; ?><br/>
                                 <?php echo $order_data->state; ?>
@@ -38,8 +38,8 @@ echo PDF_HEADER;
 
         </td>
         <td style="width: 30%" >
-            <div style="float:right;width: 300px;height: 200px">
-                <b>Order Information</b><br/>
+            <div style="float:right;width: 300px;height: 250px">
+                <b style="width: 100%;height: 50px;float: left;">Order Information</b><br/>
                 <table class="gn_table" style="border-top: 1px solid;margin-top: 5px; ">
                     <tr>
                         <th style="text-align: left;">Order No.</th>
@@ -109,7 +109,7 @@ echo PDF_HEADER;
     </td>
 
     <td style="width: 200px;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">
-        <?php echo $product->title; ?> - <?php echo $product->item_name; ?><br/>
+        <?php echo $product->title; ?><br/>
         <small style="font-size: 10px;">(<?php echo $product->sku; ?>)</small>
 
 
@@ -132,50 +132,12 @@ echo PDF_HEADER;
 
     </td>
     </tr>
-    <tr>
-        <td colspan="6" style="border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 10px 10px;">
-
-            <table style="width: 100%">
-                <tr> <td colspan="2" style="text-align: left;padding: 5px;background: rgb(225, 225, 225);">
-                        <b>Style Details:</b> <?php echo $product->title; ?> - <?php echo $product->item_name; ?>
-                    </td></tr>
-
-                <?php
-                foreach ($product->custom_dict as $key => $value) {
-                    echo "<tr><td style='width: 300px;border-bottom:1px solid #c0c0c0;padding-left:20px;'>$key</td><td style='border-bottom:1px solid #c0c0c0'> $value</td></tr>";
-                }
-                ?>  
-            </table>
-        </td>
-    </tr>
+   
     <?php
 }
 ?>
 
-<tr>
-    <td colspan="6" style="width: 20px;text-align: left;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;padding: 10px;">
 
-        <table style="width: 100%">
-            <tr> <td colspan="2" style="text-align: left;padding: 5px;background: rgb(225, 225, 225);">
-                    <b>Size(s):</b> <?php echo $order_data->measurement_style; ?>
-                </td></tr>
-            <?php
-            if (count($measurements_items)) {
-                foreach ($measurements_items as $keym => $valuem) {
-                    $mvalues = explode(" ", $valuem['measurement_value']);
-                    echo "<tr><td style='width: 300px;border-bottom:1px solid #c0c0c0;padding-left:20px;'>" . $valuem['measurement_key'] . "</td><td style='border-bottom:1px solid #c0c0c0'>" . $mvalues[0] . " <span style='margin-left: 1px;
-    padding: 0;
-    font-size: 10px;
-
-    position: absolute;
-    margin-top: -5px;
-    width: 20px;'>" . $mvalues[1] . '"</span>' . "</td></tr>";
-                }
-            }
-            ?>  
-        </table>
-    </td>
-</tr>
 <!--end of cart details-->
 <tr style="" >
     <td rowspan="5" colspan="3" style="text-align: left;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">

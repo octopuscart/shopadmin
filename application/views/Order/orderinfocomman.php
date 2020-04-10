@@ -87,9 +87,13 @@
                     <?php echo $ordersdetails['order_data']->name; ?>
                 </strong> <br />
                 <div style="    padding: 5px 0px;">
-                    <?php echo $ordersdetails['order_data']->address; ?><br />
-    
-                    <?php echo $ordersdetails['order_data']->pincode; ?>
+       
+                      <?php echo $ordersdetails['order_data']->address1; ?><br/>
+                            <?php echo $ordersdetails['order_data']->address2; ?><br/>
+                            <?php echo $ordersdetails['order_data']->state; ?>
+                            <?php echo $ordersdetails['order_data']->city; ?>
+
+                            <?php echo $ordersdetails['order_data']->country; ?> <?php echo $ordersdetails['order_data']->zipcode; ?>
 
                 </div>
                 <table class="gn_table">
