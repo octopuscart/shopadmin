@@ -249,7 +249,7 @@
                         </td>
 
                         <td style="width: 200px;">
-                            <?php echo $product->title; ?> - <?php echo $product->item_name; ?><br/>
+                            <?php echo $product->title; ?><br/>
                             <small style="font-size: 10px;">(<?php echo $product->sku; ?>)</small>
 
 
@@ -267,34 +267,14 @@
                             <?php echo $product->total_price; ?>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="6">
-                            <b>Style Details : <?php echo $product->title; ?> - <?php echo $product->item_name; ?></b>
-                            <br/><?php
-                            foreach ($product->custom_dict as $key => $value) {
-                                echo "<p class='style_block'><b>$key</b><span> $value</span></p>";
-                            }
-                            ?>  
-                        </td>
-                    </tr>
+                   
+                          
                     <?php
                 }
                 ?>
                 <!--end of cart details-->
 
-                <tr>
-                    <td colspan="6">
-                        <b>Sizes: <?php echo $order_data->measurement_style; ?></b>
-                        <br/><?php
-                if (count($measurements_items)) {
-                    foreach ($measurements_items as $keym => $valuem) {
-                        $mvalues = explode(" ", $valuem['measurement_value']);
-                        echo "<p class='style_block'><b>" . $valuem['measurement_key'] . " </b><span> " . $mvalues[0] . " <span class='fr_value'>" . $mvalues[1] . '"' . "</span></span></p>";
-                    }
-                }
-                ?>  
-                    </td>
-                </tr>
+                
 
 
                 <tr>
