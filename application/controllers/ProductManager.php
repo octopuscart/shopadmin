@@ -613,7 +613,7 @@ class ProductManager extends CI_Controller {
         $query1 = $this->db->query($query);
         $productslistcount = $query1->result_array();
 
-        $query = "select p.* from products as p $editionalquery $searchqry  order by id desc limit  $start, $length";
+        $query = "select p.* from products as p $editionalquery $searchqry  order by id  limit  $start, $length";
         $query2 = $this->db->query($query);
         $productslist = $query2->result_array();
 
