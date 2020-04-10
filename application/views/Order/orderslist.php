@@ -52,9 +52,9 @@ $this->load->view('layout/topmenu');
                         <thead>
                             <tr>
                                 <th style="width: 70px">S. No.</th>
-                                <th style="width:250px">Order Information</th>
+                                <th style="width:200px">Order Information</th>
                                 <th style="width:200px">Customer Information</th>
-                                <th style="width:80px">Shipping Address</th>
+                                <th style="width:250px">Shipping Address</th>
                                 <th style="width:100px">Payment Type</th>
                                 <th>Status</th>
                                 <th></th>
@@ -75,15 +75,15 @@ $this->load->view('layout/topmenu');
 
                                             <table class="small_table">
                                                 <tr>
-                                                    <th>Order No.</th>
+                                                    <th>Ord. No.</th>
                                                     <td>: <?php echo $value->order_no; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Total Amount</th>
+                                                    <th>Total Amt.</th>
                                                     <td>: {{<?php echo $value->total_price; ?>|currency:" "}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Total Products</th>
+                                                    <th>Total Prd.</th>
                                                     <td>: {{<?php echo $value->total_quantity; ?>}}</td>
                                                 </tr>
                                             </table>
@@ -106,14 +106,19 @@ $this->load->view('layout/topmenu');
                                             </table>
 
                                         </td>
-                                        <td>
+                                        <td style="font-size: 10px;">
 
-                                            <b> <?php echo $value->address; ?></b>
+                                            <?php echo $value->address1; ?><br/>
+                            <?php echo $value->address2; ?><br/>
+                            <?php echo $value->state; ?>
+                            <?php echo $value->city; ?>
+
+                            <?php echo $value->country; ?> <?php echo $value->zipcode; ?>
                                             <table class="small_table">
 
                                                 <tr>
                                                     <th><i class="fa fa-map-marker"></i> &nbsp; </th>
-                                                    <td> <?php echo $value->pincode; ?></td>
+                                                    <td> <?php echo 1; ?></td>
                                                 </tr>
                                             </table>
 
