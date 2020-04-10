@@ -294,7 +294,6 @@ class Order_model extends CI_Model {
                 $this->load->library('m_pdf');
                 $this->m_pdf->pdf->SetHTMLHeader($html_header);
                 $this->m_pdf->pdf->SetHTMLFooter($html_footer);
-
                 $this->m_pdf->pdf->WriteHTML($html);
                 $this->m_pdf->pdf->Output($pdfFilePath, "D");
             }
