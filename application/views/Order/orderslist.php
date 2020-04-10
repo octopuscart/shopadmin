@@ -102,25 +102,19 @@ $this->load->view('layout/topmenu');
                                                     <th><i class="fa fa-phone"></i>  &nbsp;</th>
                                                     <td> <?php echo $value->contact_no; ?></td>
                                                 </tr>
-                                                
+
                                             </table>
 
                                         </td>
                                         <td style="font-size: 10px;">
 
                                             <?php echo $value->address1; ?><br/>
-                            <?php echo $value->address2; ?><br/>
-                            <?php echo $value->state; ?>
-                            <?php echo $value->city; ?>
+                                            <?php echo $value->address2; ?><br/>
+                                            <?php echo $value->state; ?>
+                                            <?php echo $value->city; ?>
 
-                            <?php echo $value->country; ?> <?php echo $value->zipcode; ?>
-                                            <table class="small_table">
+                                            <?php echo $value->country; ?> <?php echo $value->zipcode; ?>
 
-                                                <tr>
-                                                    <th><i class="fa fa-map-marker"></i> &nbsp; </th>
-                                                    <td> <?php echo 1; ?></td>
-                                                </tr>
-                                            </table>
 
                                         </td>
 
@@ -130,7 +124,7 @@ $this->load->view('layout/topmenu');
                                             echo $value->payment_mode;
                                             ?>
                                         </td>
-                                     
+
                                         <td>
                                             <?php
                                             echo "" . $value->status . "<br/>";
