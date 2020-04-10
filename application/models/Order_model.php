@@ -291,6 +291,7 @@ class Order_model extends CI_Model {
             if ($checkcode == 0) {
                 echo $html;
             } else {
+                ob_clean();
                 $this->load->library('m_pdf');
                 $this->m_pdf->pdf->SetHTMLHeader($html_header);
                 $this->m_pdf->pdf->SetHTMLFooter($html_footer);
