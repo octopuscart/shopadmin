@@ -158,7 +158,7 @@ echo PDF_HEADER;
 </tr>
 <tr style="">
     <td colspan="2" style="text-align: right;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">Shipping Amount</td>
-    <td style="text-align: right;width: 60px;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;"><?php echo GLOBAL_CURRENCY . " " . number_format($order_data->credit_price, 2, '.', ''); ?> </td>
+    <td style="text-align: right;width: 60px;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;"><?php echo GLOBAL_CURRENCY . " " . number_format($order_data->shipping_price, 2, '.', ''); ?> </td>
 </tr>
 <tr style="">
     <td colspan="2" style="text-align: right;text-align: right;padding: 0px 10px;border: 1px solid rgb(157, 153, 150);border-collapse: collapse;">Coupon Discount</td>

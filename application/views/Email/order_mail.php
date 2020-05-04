@@ -290,7 +290,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: right">Shipping Amount</td>
-                    <td style="text-align: right;width: 60px"><?php echo GLOBAL_CURRENCY . " " . number_format($order_data->credit_price, 2, '.', ''); ?> </td>
+                    <td style="text-align: right;width: 60px"><?php echo GLOBAL_CURRENCY . " " . number_format($order_data->shipping_price, 2, '.', ''); ?> </td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: right">Coupon Discount</td>

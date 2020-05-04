@@ -590,7 +590,7 @@ class ProductManager extends CI_Controller {
 
         $search = $this->input->get("search")['value'];
         if ($search) {
-            $searchqry = " and p.title like '%$search%' or p.sku like '%$search%' ";
+            $searchqry = ' and p.title like "%$search%" or p.sku like "%$search%" ';
         }
 
         $editionalquery = "where p.status = '1'";
