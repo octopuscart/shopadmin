@@ -169,6 +169,7 @@
 
                     <?php
                     foreach ($ordersdetails['cart_data'] as $key => $product) {
+                     
                         ?>
                         <tr>
                             <td style="text-align: right">
@@ -177,7 +178,7 @@
 
                             <td style="width: 80px">
                     <center>
-                        <img src=" <?php echo $product->file_name; ?>" style="height: 70px;" />
+                        <img src="<?php echo $product->file_name; ?>" style="height: 70px;" />
                     </center>
                     </td>
 
