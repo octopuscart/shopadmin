@@ -118,10 +118,12 @@
                         <td>: <?php echo $ordersdetails['order_data']->order_no; ?> </td>
                     </tr>
                     <tr>
-                        <th>Date Time</th>
+                        <th>Order Date Time</th>
                         <td>: <?php echo $ordersdetails['order_data']->order_date; ?>
                             <?php echo $ordersdetails['order_data']->order_time; ?> </td>
                     </tr>
+                    
+                    
                     <tr>
                         <th>Payment Mode</th>
                         <td>: <?php echo $ordersdetails['order_data']->payment_mode; ?> </td>
@@ -141,6 +143,14 @@
                                 echo "Pending";
                             }
                             ?> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding: 10px;"></td>
+                    </tr>
+                     <tr style="font-size: 13px;">
+                        <th>Delivery Date Time</th>
+                        <td>: <?php echo $ordersdetails['order_data']->delivery_date; ?>
+                            <?php echo $ordersdetails['order_data']->delivery_time; ?> </td>
                     </tr>
                 </table>
             </address>
@@ -245,6 +255,7 @@
                                 $laststatus_ctime = $value->c_time;
                                 $laststatusremark = $value->remark;
                             }
+                            
                             ?>
 
 
