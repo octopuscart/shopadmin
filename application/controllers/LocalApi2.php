@@ -226,7 +226,6 @@ class LocalApi2 extends REST_Controller {
             "total_user" => count($userdata),
             "total_unseen_order" => count($order_unssen),
             "total_unssen_emails" => "0",
-          
         );
 
 
@@ -570,7 +569,7 @@ class LocalApi2 extends REST_Controller {
         header("Access-Control-Allow-Methods: GET");
         header("Access-Control-Allow-Methods: GET, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
-       
+
 
         $this->db->order_by('id', 'desc');
         $this->db->where('order_seen', "0");
@@ -578,7 +577,7 @@ class LocalApi2 extends REST_Controller {
         $orderlist = $query->result_array();
 
         $ordercount = count($orderlist);
-      
+
 
         $totalcount = $ordercount + 0;
 
@@ -589,7 +588,7 @@ class LocalApi2 extends REST_Controller {
         if ($ordercount) {
             $messageo = "Total $ordercount Unseen Order(s)";
         }
-    
+
         $message = $messageo . $messagem;
 
         $query = $this->db->get('gcm_registration');
@@ -630,6 +629,18 @@ class LocalApi2 extends REST_Controller {
         }
         $data = array('title' => $title, "message" => $message);
         $this->android($data, $regid);
+    }
+
+    function testMsg_get() {
+        $data = array('title' => "test messae", "message" => "test");
+        $query = $this->db->get('gcm_registration');
+        $gcm_registration = $query->result_array();
+        $regid = [];
+        foreach ($gcm_registration as $key => $value) {
+            array_push($regid, $value['reg_id']);
+        }
+
+        echo $this->android($data, $regid);
     }
 
 }
