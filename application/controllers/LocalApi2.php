@@ -570,20 +570,17 @@ class LocalApi2 extends REST_Controller {
         header("Access-Control-Allow-Methods: GET");
         header("Access-Control-Allow-Methods: GET, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
-        $this->db->order_by('id', 'desc');
-        $this->db->where('seen', "0");
-        $query = $this->db->get('web_order_email');
-        $emaillist = $query->result_array();
+       
 
         $this->db->order_by('id', 'desc');
         $this->db->where('status', "0");
-        $query = $this->db->get('web_order');
+        $query = $this->db->get('user_order');
         $orderlist = $query->result_array();
 
         $ordercount = count($orderlist);
-        $emailcount = count($emaillist);
+      
 
-        $totalcount = $ordercount + $emailcount;
+        $totalcount = $ordercount + 0;
 
         $title = "$totalcount Unseen Notifications";
         $message = "";
@@ -592,9 +589,7 @@ class LocalApi2 extends REST_Controller {
         if ($ordercount) {
             $messageo = "Total $ordercount Unseen Order(s)";
         }
-        if ($emailcount) {
-            $messagem = ($messageo ? " and " : "Total ") . "$emailcount Unseen Email(s)";
-        }
+    
         $message = $messageo . $messagem;
 
         $query = $this->db->get('gcm_registration');
