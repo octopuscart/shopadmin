@@ -205,7 +205,7 @@ class LocalApi2 extends REST_Controller {
 
     function homeData_get() {
         $this->db->order_by('id', 'desc');
-        $this->db->where('status', "0");
+        $this->db->where('order_seen', "0");
         $query = $this->db->get('user_order');
         $order_unssen = $query->result_array();
 
