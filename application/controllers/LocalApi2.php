@@ -309,12 +309,12 @@ class LocalApi2 extends REST_Controller {
         $systemlog = $query->result_array();
         $tempdata = [];
         foreach ($systemlog as $key => $value) {
-        
+
             $this->db->where('order_id', $value['id']);
             $query = $this->db->get('cart');
             $cartdata = $query->result();
             $value['cart'] = $cartdata;
-            
+
             array_push($tempdata, $value);
         }
 
@@ -473,6 +473,18 @@ class LocalApi2 extends REST_Controller {
         );
         $this->db->insert('system_log', $orderlog);
 
+        $this->response(array("status" => "done"));
+    }
+
+    //Mobile Booking APi
+    function setOrderSeen_post() {
+        $this->config->load('rest', TRUE);
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        $order_id = $this->post('order_id');
+        $this->db->set('order_seen', '1');
+        $this->db->where('id', $order_id); //set column_name and value in which row need to update
+        $this->db->update('user_order');
         $this->response(array("status" => "done"));
     }
 
