@@ -304,16 +304,18 @@ class LocalApi2 extends REST_Controller {
     }
 
     function checkUnseenOrderMobile_get() {
-//        $this->db->order_by('id', 'desc');
+        $this->db->order_by('id', 'desc');
         $query = $this->db->get('user_order');
         $systemlog = $query->result_array();
-        $tempdata = array();
+        $tempdata = [];
         foreach ($systemlog as $key => $value) {
-            $tempdata[$value['id']] = $value;
+        
             $this->db->where('order_id', $value['id']);
             $query = $this->db->get('cart');
             $cartdata = $query->result();
-            $tempdata[$value['id']]['cart'] = $cartdata;
+            $value['cart'] = $cartdata;
+            
+            array_push($tempdata, $value);
         }
 
         header('Content-type: application/json');
