@@ -304,7 +304,7 @@ class LocalApi2 extends REST_Controller {
     }
 
     function checkUnseenOrderMobile_get() {
-        $this->db->order_by('id', 'desc');
+//        $this->db->order_by('id', 'desc');
         $query = $this->db->get('user_order');
         $systemlog = $query->result_array();
         $tempdata = array();
