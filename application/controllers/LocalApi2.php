@@ -477,7 +477,7 @@ class LocalApi2 extends REST_Controller {
     }
 
     //Mobile Booking APi
-    function setOrderSeen_post() {
+    function updateOrderSeen_post() {
         $this->config->load('rest', TRUE);
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
