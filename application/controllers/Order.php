@@ -71,7 +71,7 @@ class Order extends CI_Controller {
             $cartdata = $query->result();
             $tempdata = array();
             $itemarray = array();
-          
+
             array_push($orderslistr, $value);
         }
         $data['orderslist'] = $orderslistr;
@@ -203,6 +203,11 @@ class Order extends CI_Controller {
         $data['vendor_order'] = $vendor_order_details;
         if ($order_details) {
             $order_id = $order_details['order_data']->id;
+
+            $this->db->set('order_seen', '1');
+            $this->db->where('id', $order_id); //set column_name and value in which row need to update
+            $this->db->update('user_order');
+
             $data['ordersdetails'] = $order_details;
             $data['order_key'] = $order_key;
             $this->db->order_by('id', 'desc');
@@ -220,12 +225,12 @@ class Order extends CI_Controller {
                     case "Order Confirmed":
                         redirect("Order/orderdetails_payments/$order_key");
                         break;
-                    
-                    
+
+
                     case "Order Verifiaction":
                         redirect("Order/orderdetails_payments/$order_key?status=Pending");
                         break;
-                    
+
                     case "Order Enquiry":
                         redirect("Order/orderdetails_enquiry/$order_key");
                         break;
@@ -534,6 +539,9 @@ class Order extends CI_Controller {
         $daterange = $date1 . " to " . $date2;
         $data['daterange'] = $daterange;
         if ($this->user_type == 'Admin' || $this->user_type == 'Manager') {
+
+
+
             $this->db->order_by('id', 'desc');
             $this->db->where('order_date between "' . $date1 . '" and "' . $date2 . '"');
             $query = $this->db->get('user_order');
