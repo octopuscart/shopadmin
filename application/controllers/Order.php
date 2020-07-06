@@ -788,7 +788,7 @@ class Order extends CI_Controller {
 
     public function bookinglist() {
         $data = array();
-        $data['exportdata'] = 'yes';
+        $data['exportdata'] = 'no';
         $date1 = date('Y-m-') . "01";
         $date2 = date('Y-m-d');
         if (isset($_GET['daterange'])) {
