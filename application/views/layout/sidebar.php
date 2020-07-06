@@ -17,7 +17,6 @@ $product_menu = array(
         "Categories" => site_url("ProductManager/categories"),
         "Product Out Of Stock" => site_url("ProductManager/productReportStockOut"),
         "Product Removed" => site_url("ProductManager/productReportTrash"),
-        
 //        "Items Prices" => site_url("ProductManager/categoryItems"),
 //        "Product Sorting" => site_url("ProductManager/productSorting"),
 //        "Product Colors" => site_url("ProductManager/productColors"),
@@ -45,6 +44,20 @@ $order_menu = array(
     ),
 );
 array_push($menu_control, $order_menu);
+
+
+
+$booking_menu = array(
+    "title" => "Booking Manegement",
+    "icon" => "fa fa-calendar",
+    "active" => "",
+    "sub_menu" => array(
+        "Book Now" => site_url("Order/booknow"),
+        "Booking Reports" => site_url("Order/bookinglist"),
+    ),
+);
+array_push($menu_control, $booking_menu);
+
 
 $client_menu = array(
     "title" => "Client Manegement",
@@ -79,7 +92,6 @@ $lookbook_menu = array(
     "active" => "",
     "sub_menu" => array(
         "Images" => site_url("Media/images"),
-
 //        "Tags" => site_url("CMS/blogTag"),
     ),
 );

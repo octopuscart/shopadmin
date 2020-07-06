@@ -751,6 +751,64 @@ class Order extends CI_Controller {
         $this->load->view('Order/orderanalysis', $data);
     }
 
+    //book now
+    public function booknow() {
+        $data = array();
+        $data['submitdata'] = "";
+        if (isset($_POST['booknow'])) {
+            $booking_order = array(
+                'name' => $this->input->post('name'),
+                'email' => $this->input->post('email'),
+                'contact' => $this->input->post('contact'),
+                'select_date' => $this->input->post('select_date'),
+                'select_time' => $this->input->post('select_time'),
+                'people' => $this->input->post('people'),
+                'datetime' => date("Y-m-d H:i:s a"),
+                'order_source' => $this->input->post('order_source'),
+                'extra_remark' => '',
+                'booking_type' => 'Admin Panel',
+                'select_table' => '',
+            );
+            $this->db->insert('booking_order', $booking_order);
+            $last_id = $this->db->insert_id();
+            $oderid = $last_id;
+            $ordertype = $this->input->post('order_source');
+            $orderlog = array(
+                'log_type' => "Reservation Done",
+                'log_datetime' => date('Y-m-d H:i:s'),
+                'user_id' => "",
+                'order_id' => $last_id,
+                'log_detail' => "Booking No. #$last_id  $ordertype From Admin Panel",
+            );
+            $this->db->insert('system_log', $orderlog);
+            redirect("Order/booknow");
+        }
+        $this->load->view('Order/booknow', $data);
+    }
+
+    public function bookinglist() {
+        $data = array();
+        $data['exportdata'] = 'yes';
+        $date1 = date('Y-m-') . "01";
+        $date2 = date('Y-m-d');
+        if (isset($_GET['daterange'])) {
+            $daterange = $this->input->get('daterange');
+            $datelist = explode(" to ", $daterange);
+            $date1 = $datelist[0];
+            $date2 = $datelist[1];
+        }
+        $daterange = $date1 . " to " . $date2;
+        $data['daterange'] = $daterange;
+
+        $this->db->order_by('id', 'desc');
+        $this->db->where('select_date between "' . $date1 . '" and "' . $date2 . '"');
+        $query = $this->db->get('booking_order');
+        $orderlist = $query->result();
+        $data['orderslist'] = $orderlist;
+
+        $this->load->view('Order/bookinglist', $data);
+    }
+
 }
 
 ?>
