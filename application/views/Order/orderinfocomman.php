@@ -93,7 +93,8 @@
                             <?php echo $ordersdetails['order_data']->state; ?>
                             <?php echo $ordersdetails['order_data']->city; ?>
 
-                            <?php echo $ordersdetails['order_data']->country; ?> <?php echo $ordersdetails['order_data']->zipcode; ?>
+                            <?php echo $ordersdetails['order_data']->country; ?>
+                               
 
                 </div>
                 <table class="gn_table">
@@ -152,6 +153,13 @@
                         <td>: <?php echo $ordersdetails['order_data']->delivery_date; ?>
                             <?php echo $ordersdetails['order_data']->delivery_time; ?> </td>
                     </tr>
+                    
+                    <tr style="font-size: 13px;">
+                        <th>Delivery Area</th>
+                        <td>: <?php echo $ordersdetails['order_data']->zipcode; ?></td>
+                    </tr>
+                    
+                  
                 </table>
             </address>
         </div>

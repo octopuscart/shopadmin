@@ -20,7 +20,7 @@ echo PDF_HEADER;
                                 <?php echo $order_data->state; ?>
                                 <?php echo $order_data->city; ?>
 
-                                <?php echo $order_data->country; ?> <?php echo $order_data->zipcode; ?>
+                                <?php echo $order_data->country; ?>
 
                             </div>
                         </td>
@@ -33,6 +33,10 @@ echo PDF_HEADER;
                         <th style="text-align: left;    width: 95px;">Contact No.</th>
                         <td>:  <?php echo $order_data->contact_no; ?> </td>
                     </tr>
+                    <tr>
+                        <th style="text-align: left;">Delivery Area</th>
+                        <td>:   <?php echo $order_data->zipcode; ?></td>
+                    </tr>
                 </table>
             </div>
 
@@ -41,6 +45,13 @@ echo PDF_HEADER;
             <div style="float:right;width: 300px;height: 250px">
                 <b style="width: 100%;height: 50px;float: left;">Order Information</b><br/>
                 <table class="gn_table" style="border-top: 1px solid;margin-top: 5px; ">
+                    
+                  
+                    <tr>
+                        <th style="text-align: left;">Delivery Date/Time</th>
+                        <td>:  <?php echo $order_data->delivery_date; ?> <?php echo $order_data->delivery_time; ?>  </td>
+                    </tr>
+                    
                     <tr>
                         <th style="text-align: left;">Order No.</th>
                         <td>:  <?php echo $order_data->order_no; ?> </td>

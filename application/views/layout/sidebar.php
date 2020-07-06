@@ -152,7 +152,7 @@ array_push($menu_control, $setting_menu);
 
 $social_menu = array(
     "title" => "Social Management",
-    "icon" => "fa fa-calendar",
+    "icon" => "fa fa-facebook",
     "active" => "",
     "sub_menu" => array(
         "Social Link" => site_url("CMS/socialLink"),
@@ -163,7 +163,7 @@ array_push($menu_control, $social_menu);
 
 $seo_menu = array(
     "title" => "SEO",
-    "icon" => "fa fa-calendar",
+    "icon" => "fa fa-area-chart",
     "active" => "",
     "sub_menu" => array(
         "General" => site_url("CMS/siteSEOConfigUpdate"),

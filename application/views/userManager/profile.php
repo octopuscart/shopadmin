@@ -176,7 +176,6 @@ $this->load->view('layout/topmenu');
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#userAddress" data-toggle="tab">Address</a></li>
                 <li class=""><a href="#usersOrders" data-toggle="tab">Orders List</a></li>
-                <li class=""><a href="#userMeasurements" data-toggle="tab">Measurements</a></li>
                 <li class=""><a href="#userLog" data-toggle="tab">User Log</a>
             </ul>
             <div class="tab-content">
@@ -260,53 +259,6 @@ $this->load->view('layout/topmenu');
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="userMeasurements">
-                    <h3 class="m-t-10"><i class="fa fa-list-ol"></i> User Measurements </h3>
-                    <div class="row">
-                        <?php
-                        foreach ($measurements as $key => $value) {
-                            ?>
-                            <div class="measurementbox  "> 
-                                <div class="pricing">
-
-                                    <article class="row" style="padding: 10px">
-                                        <div class="col-md-12">
-                                            <div class="col-md-12">
-                                                <h6 class="pull-left">
-                                                    Profile. #<?php echo $value['profile']; ?> <small> <?php echo $value['datetime']; ?></small>
-                                                </h6>
-                                                <a role="button" class="btn btn-xs btn-default  btn-xs pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapsemeasurements<?php echo $value['id']; ?>" aria-expanded="true" aria-controls="collapseOne" style="    margin: 5px 0px;
-                                                   padding: 4px;">
-                                                    View Measurement
-                                                </a>
-                                            </div>
-                                            <div id="collapsemeasurements<?php echo $value['id']; ?>" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="panel-body" style="padding:10px 0px;">
-                                                            <?php
-                                                            echo "<ul class='list-group'>";
-                                                            $measurements_items = $value['measurements'];
-                                                            foreach ($measurements_items as $keym => $valuem) {
-
-                                                                echo "<li class='list-group-item'>" . $keym . " <span class='badge'>" . $valuem . "</span></li>";
-                                                            }
-                                                            echo "</ul>";
-                                                            ?>                             
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        ?>
-                    </div>
-                </div>
 
                 <!--user log-->
                 <div class="tab-pane fade" id="userLog">
