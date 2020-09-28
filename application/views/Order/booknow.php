@@ -153,7 +153,7 @@ $this->load->view('layout/topmenu');
 
                     <div class="row clearfix" style="    width: fit-content;">
 
-                                <div class="p-5rounded bg-white" style="width: 600px;
+                                <div class="p-5rounded bg-white" style="width: 800px;
                                      padding: 15px;">
                                     <h3 class="font-secondary h1 color">Book At Restaurants</h3>
 
@@ -161,14 +161,14 @@ $this->load->view('layout/topmenu');
                                         <div class="form-result"></div>
                                         <form class="mb-0 row"  action="#" method="post" >
                                             <div class="form-process"></div>
-                                            <div class="col-sm-6 mb-3">
+                                            <div class="col-sm-4 mb-3">
                                                 <input type="text" id="template-contactform-name" name="name" value="" class="form-control border-form-control required" placeholder="Name" required="">
                                             </div>
-                                            <div class="col-sm-6 mb-3">
+                                            <div class="col-sm-4 mb-3">
                                                 <input type="email" id="template-contactform-email" name="email" value="" class="required email form-control border-form-control" placeholder="Email Address" required="">
                                             </div>
                                             <div class="clear"></div>
-                                            <div class="col-sm-6 mb-3">
+                                            <div class="col-sm-4 mb-3">
                                                 <input type="text" id="template-contactform-phone" name="contact" value="" class="form-control border-form-control required" placeholder="Contact No." required="">
                                             </div>
                                             <div class="col-sm-6 mb-3 input-daterange travel-date-group">
@@ -213,8 +213,8 @@ $this->load->view('layout/topmenu');
                                                    
                                                 </select>
                                             </div>
-                                            <div class="col-md-6 mb-3">
-                                      
+                                            <div class="col-sm-12 mb-3">
+                                                <textarea id="template-contactform-phone" name="extra_remark" value="" class="form-control border-form-control required" placeholder="Remark" ></textarea>
                                             </div>
                                             
                                             <div class="clear"></div>

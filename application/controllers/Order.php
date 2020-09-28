@@ -765,7 +765,7 @@ class Order extends CI_Controller {
                 'people' => $this->input->post('people'),
                 'datetime' => date("Y-m-d H:i:s a"),
                 'order_source' => $this->input->post('order_source'),
-                'extra_remark' => '',
+                'extra_remark' => $this->input->post('extra_remark'),
                 'booking_type' => 'Admin Panel',
                 'select_table' => '',
             );

@@ -81,12 +81,12 @@ $this->load->view('layout/topmenu');
                         <thead>
                             <tr>
                                 <th style="width: 70px">S. No.</th>
-                                <th style="width:250px">Booking Information</th>
+                                <th style="width:150px">Booking Information</th>
                                 <th style="width:300px">Customer Information</th>
 
-                                <th>Booking Date/Time</th>
-                                <th>Source</th>
-                                <th style="width:100px"></th>
+                                <th style="width:150px">Booking Date/Time</th>
+                                <th style="width:150px">Source</th>
+                                <th >Remark</th>
 
                             </tr>
                         </thead>
@@ -148,6 +148,10 @@ $this->load->view('layout/topmenu');
                                             ?>
                                         </td>
                                         <td>
+                                            <?php
+                                      
+                                            echo $value->extra_remark . "<br/>";
+                                            ?>
                                         </td>
                                     </tr>
                                     <?php
