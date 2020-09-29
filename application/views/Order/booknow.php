@@ -172,7 +172,7 @@ $this->load->view('layout/topmenu');
                                                 <input type="text" id="template-contactform-phone" name="contact" value="" class="form-control border-form-control required" placeholder="Contact No." required="">
                                             </div>
                                             <div class="col-sm-6 mb-3 input-daterange travel-date-group">
-                                                <input type="date" id="template-contactform-subject" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date" required="">
+                                                <input type="date" id="template-contactform-subject" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date" min="<?php echo date('Y-m-d');?>" required="">
                                             </div>
                                             <div class="clear"></div>
                                             <div class="col-md-6 mb-3">
