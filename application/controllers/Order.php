@@ -788,9 +788,12 @@ class Order extends CI_Controller {
 
     public function bookinglist() {
         $data = array();
-        $data['exportdata'] = 'no';
-        $date1 = date('Y-m-') . "01";
-        $date2 = date('Y-m-d');
+        $data['exportdata'] = 'yes';
+//        $date1 = date('Y-m-') . "01";
+        $date1 = date('Y-m-d');
+
+        $date2 = date('Y-m-d', strtotime('+30 days', strtotime($date1)));
+
         if (isset($_GET['daterange'])) {
             $daterange = $this->input->get('daterange');
             $datelist = explode(" to ", $daterange);
@@ -800,6 +803,9 @@ class Order extends CI_Controller {
         $daterange = $date1 . " to " . $date2;
         $data['daterange'] = $daterange;
 
+        $data['fdate'] = $date1;
+        $data['ldate'] = $date2;
+
         $this->db->order_by('id', 'desc');
         $this->db->where('select_date between "' . $date1 . '" and "' . $date2 . '"');
         $query = $this->db->get('booking_order');
@@ -807,6 +813,26 @@ class Order extends CI_Controller {
         $data['orderslist'] = $orderlist;
 
         $this->load->view('Order/bookinglist', $data);
+    }
+
+    public function bookinglistxls($date1, $date2) {
+        $data = array();
+        $data['exportdata'] = 'no';
+        $daterange = $date1 . " to " . $date2;
+        $data['daterange'] = $daterange;
+        $data['fdate'] = $date1;
+
+        $this->db->order_by('id', 'desc');
+        $this->db->where('select_date between "' . $date1 . '" and "' . $date2 . '"');
+        $query = $this->db->get('booking_order');
+        $orderlist = $query->result();
+        $data['orderslist'] = $orderlist;
+        $html = $this->load->view('Order/bookinglistxls', $data, TRUE);
+        $filename = 'booking_report_' . $daterange . ".xls";
+        ob_clean();
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: application/vnd.ms-excel");
+        echo $html;
     }
 
 }

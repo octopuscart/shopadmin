@@ -60,7 +60,7 @@ $this->load->view('layout/topmenu');
                             <?php
                             if ($exportdata == 'yes') {
                                 ?>
-                                <a class="btn btn-warning" href="<?php echo site_url("Order/orderslistxls/$daterange"); ?>">Export</a>
+                                <a class="btn btn-warning" href="<?php echo site_url("Order/bookinglistxls/$fdate/$ldate"); ?>">Export</a>
                                 <?php
                             }
                             ?>
