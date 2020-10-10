@@ -792,7 +792,7 @@ class Order extends CI_Controller {
 //        $date1 = date('Y-m-') . "01";
         $date1 = date('Y-m-d');
 
-        $date2 = date('Y-m-d', strtotime('+30 days', strtotime($date1)));
+        $date2 = date('Y-m-d');
 
         if (isset($_GET['daterange'])) {
             $daterange = $this->input->get('daterange');

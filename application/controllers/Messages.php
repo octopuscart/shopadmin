@@ -248,20 +248,6 @@ class Messages extends CI_Controller {
             'newline' => "\r\n"
         ));
 
-//        //Amazon
-//        $this->email->initialize(array(
-//            'protocol' => 'smtp',
-//            'smtp_host' => "ssl://email-smtp.us-east-1.amazonaws.com",
-//            'smtp_user' => "AKIAJFKUSW3BKPPJ2TNA",
-//            'smtp_pass' => "AuNsBWfoNKvcadKTz1kOWZi8x11sMqj2L8teknNaN2MJ",
-//            'smtp_port' => "465",
-//            'crlf' => "\r\n",
-//            'newline' => "\r\n"
-//        ));
-
-
-
-
 
 
         $data['contactlist'] = $contactdata;
