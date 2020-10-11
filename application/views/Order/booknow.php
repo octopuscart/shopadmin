@@ -141,7 +141,7 @@ $this->load->view('layout/topmenu');
 </script>
 
 <div id="content" class="content">
-    <section class="" style="min-height: auto;" ng-controller="bookingController">
+    <section class="" style="min-height: auto;" >
 
         <div class="content-wrap" style="padding: 0px;">
 
@@ -172,12 +172,12 @@ $this->load->view('layout/topmenu');
                                                 <input type="text" id="template-contactform-phone" name="contact" value="" class="form-control border-form-control required" placeholder="Contact No." required="">
                                             </div>
                                             <div class="col-sm-6 mb-3 input-daterange travel-date-group">
-                                                <input type="date" id="template-contactform-subject" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date" min="<?php echo date('Y-m-d');?>" required="">
+                                                <input type="date" id="select_date" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date" min="<?php echo date('Y-m-d');?>" value="" required="">
                                             </div>
                                             <div class="clear"></div>
                                             <div class="col-md-6 mb-3">
                                                 <select id="template-contactform-time" class="custom-select form-control border-form-control" name="select_time" required="">
-                                                    <option value="disabled" disabled="" selected="">Select Time</option>
+                                                    <option value="-"  selected="">Select Time</option>
                                                     <option value="12:00">12:00 - 13:00</option>
                                                     <option value="13:00">13:00 - 14:00</option>
                                                     <option value="14:00">14:00 - 15:00</option>
@@ -189,7 +189,7 @@ $this->load->view('layout/topmenu');
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <select id="template-contactform-people" class="custom-select form-control border-form-control" name="people" required="">
-                                                    <option value="disabled" disabled="" selected=""  >Person</option>
+                                                    <option value="-"  >Person</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -203,7 +203,7 @@ $this->load->view('layout/topmenu');
                                             
                                             <div class="col-md-6 mb-3">
                                                 <select id="template-contactform-time" class="custom-select form-control border-form-control" name="order_source" required="">
-                                                    <option value="disabled" disabled="" selected="">Select Source</option>
+                                                    <option value="-">Select Source</option>
                                                     <option value="Quandoo">Quandoo</option>
                                                     <option value="Chope">Chope</option>
                                                     <option value="Openrice">Openrice</option>
@@ -263,6 +263,10 @@ $this->load->view('layout/topmenu');
 
 
         <script>
+            
+            $(function(){
+                $("#select_date").val("<?php echo date('Y-m-d');?>");
+            })
 
 <?php
 if ($submitdata == 'yes') {
