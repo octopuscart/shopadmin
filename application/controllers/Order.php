@@ -768,6 +768,7 @@ class Order extends CI_Controller {
                 'extra_remark' => $this->input->post('extra_remark') | '-',
                 'booking_type' => 'Admin Panel',
                 'select_table' => '',
+                'status'=>"Active",
             );
             $this->db->insert('booking_order', $booking_order);
             $last_id = $this->db->insert_id();
