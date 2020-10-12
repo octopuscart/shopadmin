@@ -866,7 +866,7 @@ class Order extends CI_Controller {
         $refamt = "0.10";
         $marchentref = $order_details['order_data']->order_no;
         $marchentrefrefund = $order_details['order_data']->order_no . '/R';
-        $returnUrl = site_url("Order/orderPaymentRefundNotify/$order_key");
+        $returnUrl = site_url("Order/orderPaymentRefundNotify");
         $mid = $this->mid;
         $secret_code = $this->secret_code;
         $salesLink1 = "http://118.140.3.194:8081/eopg_testing_env/ForexRefundRecetion";
@@ -944,12 +944,11 @@ class Order extends CI_Controller {
         redirect($endurl = $salesLink . "?" . $ganarateurl);
     }
 
-    function orderPaymentRefundNotify($order_key) {
+    function orderPaymentRefundNotify() {
 
         $returndata = $_GET;
 
-        $paymenttype = $returndata['payment_type'];
-        $orderno = $returndata['merch_ref_no'];
+
 
         print_r($returndata);
     }
