@@ -850,7 +850,7 @@ class Order extends CI_Controller {
 
     function orderRefund($order_key) {
         $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
- 
+
         $paymode = $order_details['order_data']->payment_mode;
         $paymenttype = '';
         if ($paymode == 'Alipay') {
@@ -861,7 +861,7 @@ class Order extends CI_Controller {
         }
         $orderquantity = $order_details['order_data']->total_quantity;
         $itemsdescription = "Total Quantity: $orderquantity";
-         $paymenttypeg = $paymenttype;
+        $paymenttypeg = $paymenttype;
         $amt = $order_details['order_data']->total_price;
         $refamt = "0.10";
         $marchentref = $order_details['order_data']->order_no;
@@ -878,11 +878,10 @@ class Order extends CI_Controller {
         echo $endurl = $salesLink . "?" . $ganarateurl;
 //        redirect($endurl = $salesLink . "?" . $ganarateurl);
     }
-    
-    
+
     function orderRefundTest($order_key) {
         $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
- 
+
         $paymode = $order_details['order_data']->payment_mode;
         $paymenttype = '';
         if ($paymode == 'Alipay') {
@@ -893,7 +892,7 @@ class Order extends CI_Controller {
         }
         $orderquantity = $order_details['order_data']->total_quantity;
         $itemsdescription = "Total Quantity: $orderquantity";
-         $paymenttypeg = $paymenttype;
+        $paymenttypeg = $paymenttype;
         $amt = $order_details['order_data']->total_price;
         $refamt = "0.10";
         $marchentref = $order_details['order_data']->order_no;
@@ -943,12 +942,21 @@ class Order extends CI_Controller {
 //        echo $endurl = $salesLink . "?" . $ganarateurl;
         redirect($endurl = $salesLink . "?" . $ganarateurl);
     }
-    
-    
-       function orderPaymentRefundNotify($order_key) {
-     
+
+    function orderPaymentRefundNotify($order_key) {
+
         $returndata = $_GET;
-        
+
+        $paymenttype = $returndata['payment_type'];
+        $orderno = $returndata['merch_ref_no'];
+
+        print_r($returndata);
+    }
+
+    function orderPaymentRefundNotify2($order_key) {
+
+        $returndata = $_GET;
+
         $paymenttype = $returndata['payment_type'];
         $orderno = $returndata['merch_ref_no'];
 
@@ -956,14 +964,14 @@ class Order extends CI_Controller {
             $productattr = array(
                 'c_date' => date('Y-m-d'),
                 'c_time' => date('H:i:s'),
-                'status' => "Payment Refund #".$returndata['merch_refund_id'],
-                'remark' => "Payment Refund Processed, Order No. ".$returndata['merch_ref_no'],
+                'status' => "Payment Refund #" . $returndata['merch_refund_id'],
+                'remark' => "Payment Refund Processed, Order No. " . $returndata['merch_ref_no'],
                 'description' => "Refund Id#: " . $returndata['merch_refund_id'],
                 'order_id' => $orderno
             );
             $this->db->insert('user_order_status', $productattr);
             $orderlog = array(
-                'log_type' => "Payment Refund #".$returndata['merch_refund_id'],
+                'log_type' => "Payment Refund #" . $returndata['merch_refund_id'],
                 'log_datetime' => date('Y-m-d H:i:s'),
                 'user_id' => "",
                 'order_id' => $orderno,
@@ -986,7 +994,7 @@ class Order extends CI_Controller {
                 'c_date' => date('Y-m-d'),
                 'c_time' => date('H:i:s'),
                 'status' => "Payment Refund Failure",
-                'remark' => "Payment Refund ID# ".$returndata['merch_refund_id'],
+                'remark' => "Payment Refund ID# " . $returndata['merch_refund_id'],
                 'description' => "Payment Id#: " . $returndata['merch_ref_no'],
                 'order_id' => $orderno
             );
