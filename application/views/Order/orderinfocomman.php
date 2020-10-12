@@ -74,8 +74,8 @@
             <a class="btn btn-success btn-sm m-b-10"
                href="<?php echo site_url("order/order_pdf/" . $ordersdetails['order_data']->id) ?>"><i
                     class="fa fa-download "></i> Order PDF</a>
-<!--            <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i
-                    class="fa fa-print m-r-5"></i> Print</a>-->
+            <a href="<?php echo SITE_URL.'order/orderdetails/' . $ordersdetails['order_data']->order_key; ?>" class="btn btn-sm btn-success m-b-10"><i
+                    class="fa fa-envelope m-r-5"></i> View Customer Side</a>
         </span>
         <?php echo $ordersdetails['order_data']->order_no; ?>
     </div>

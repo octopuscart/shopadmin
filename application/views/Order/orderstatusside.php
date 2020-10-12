@@ -30,5 +30,9 @@
         <a class="btn btn-block btn-social btn-info"  href="<?php echo site_url("Order/orderdetails/".$order_key."?status=Other");?>">
             <i class="fa fa-question"></i> Other
         </a>
+        <hr/>
+        <a class="btn btn-block btn-social btn-info"  href="<?php echo site_url("Order/orderRefund/$order_key");?>" target="_blank">
+            <i class="fa fa-question"></i> Order Refund
+        </a>
     </div>
 </div>

@@ -18,6 +18,18 @@ class Order extends CI_Controller {
         }
         $this->user_id = $this->session->userdata('logged_in')['login_id'];
         $this->user_type = $this->session->logged_in['user_type'];
+
+        $this->db->where_in('attr_key', ["EOPGMid", "EOPGSecretCode", "EOPGSalesLink", "EOPGQueryLink"]);
+        $query = $this->db->get('configuration_attr');
+        $paymentattr = $query->result_array();
+        $paymentconf = array();
+        foreach ($paymentattr as $key => $value) {
+            $paymentconf[$value['attr_key']] = $value['attr_val'];
+        }
+        $this->mid = $paymentconf['EOPGMid'];
+        $this->secret_code = $paymentconf['EOPGSecretCode'];
+        $this->salesLink = $paymentconf['EOPGSalesLink'];
+        $this->queryLink = $paymentconf['EOPGQueryLink'];
     }
 
 //list of data according to date list
@@ -768,7 +780,7 @@ class Order extends CI_Controller {
                 'extra_remark' => $this->input->post('extra_remark'),
                 'booking_type' => 'Admin Panel',
                 'select_table' => '',
-                'status'=>"Active",
+                'status' => "Active",
             );
             $this->db->insert('booking_order', $booking_order);
             $last_id = $this->db->insert_id();
@@ -834,6 +846,153 @@ class Order extends CI_Controller {
         header("Content-Disposition: attachment; filename=$filename");
         header("Content-Type: application/vnd.ms-excel");
         echo $html;
+    }
+
+    function orderRefund($order_key) {
+        $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
+ 
+        $paymode = $order_details['order_data']->payment_mode;
+        $paymenttype = '';
+        if ($paymode == 'Alipay') {
+            $paymenttype = 'ALIPAY';
+        }
+        if ($paymode == 'WeChat') {
+            $paymenttype = 'WECHAT';
+        }
+        $orderquantity = $order_details['order_data']->total_quantity;
+        $itemsdescription = "Total Quantity: $orderquantity";
+         $paymenttypeg = $paymenttype;
+        $amt = $order_details['order_data']->total_price;
+        $refamt = "0.10";
+        $marchentref = $order_details['order_data']->order_no;
+        $marchentrefrefund = $order_details['order_data']->order_no . '/R';
+        $returnUrl = site_url("Order/orderPaymentRefundNotify/$order_key");
+        $mid = $this->mid;
+        $secret_code = $this->secret_code;
+        $salesLink = "http://118.140.3.194:8081/eopg_testing_env/ForexRefundRecetion";
+        $urlset = "merch_ref_no=$marchentref&mid=$mid&payment_type=$paymenttypeg&service=REFUND&trans_amount=$amt&refund_amount=$refamt&refund_reason=Order $marchentref Cancelled&return_url=$returnUrl";
+        $hsakeystr = $secret_code . $urlset;
+        $seckey = hash("sha256", $hsakeystr);
+        $ganarateurl = "&api_version=2.9";
+        $ganarateurl = $urlset . $ganarateurl . "&signature=$seckey";
+        echo $endurl = $salesLink . "?" . $ganarateurl;
+//        redirect($endurl = $salesLink . "?" . $ganarateurl);
+    }
+    
+    
+    function orderRefundTest($order_key) {
+        $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
+ 
+        $paymode = $order_details['order_data']->payment_mode;
+        $paymenttype = '';
+        if ($paymode == 'Alipay') {
+            $paymenttype = 'ALIPAY';
+        }
+        if ($paymode == 'WeChat') {
+            $paymenttype = 'WECHAT';
+        }
+        $orderquantity = $order_details['order_data']->total_quantity;
+        $itemsdescription = "Total Quantity: $orderquantity";
+         $paymenttypeg = $paymenttype;
+        $amt = $order_details['order_data']->total_price;
+        $refamt = "0.10";
+        $marchentref = $order_details['order_data']->order_no;
+        $marchentrefrefund = $order_details['order_data']->order_no . '/R';
+        $returnUrl = site_url("Order/orderPaymentRefundNotify/$order_key");
+        $mid = $this->mid;
+        $secret_code = $this->secret_code;
+        echo "<br/>";
+        $salesLink = "http://118.140.3.194:8081/eopg_testing_env/refundFunction.jsp";
+        $urlset = "service=REFUND&payment_type=ALIPAY&mid=852202005040001&return_url=http://192.168.1.3/shopadmin/index.php/Order/orderPaymentRefundNotify/5aa51b1f48b984c0f400f0176d8810d9&merch_ref_no=WL2020/10/11/205&refund_amount=0.10&refund_reason=test&trans_amount=0.35";
+        echo $hsakeystr = $secret_code . $urlset;
+        echo "<br/>--";
+        $seckey = hash("sha256", $hsakeystr);
+        $ganarateurl = "&api_version=2.9";
+        $ganarateurl = $urlset . $ganarateurl . "&signature=$seckey";
+        echo $endurl = $salesLink . "?" . $ganarateurl;
+//        redirect($endurl = $salesLink . "?" . $ganarateurl);
+    }
+
+    function orderRefundStatus($order_key) {
+        $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
+        print_r($order_details['order_data']->payment_mode);
+        $paymode = $order_details['order_data']->payment_mode;
+        $paymenttype = '';
+        if ($paymode == 'Alipay') {
+            $paymenttype = 'ALIPAY';
+        }
+        if ($paymenttype = 'WeChat') {
+            $paymenttype = 'WECHAT';
+        }
+        $refamt = "0.10";
+        $orderquantity = $order_details['order_data']->total_quantity;
+        $itemsdescription = "Total Quantity: $orderquantity";
+        $paymenttypeg = $paymenttype;
+        $amt = $order_details['order_data']->total_price;
+        $marchentref = $order_details['order_data']->order_no;
+        $marchentrefrefund = $order_details['order_data']->order_no . '/R';
+        $returnUrl = site_url("Order/orderPaymentResult/$order_key/$paymenttype");
+        $mid = $this->mid;
+        $secret_code = $this->secret_code;
+        $salesLink = $this->salesLink;
+        $urlset = "merch_refund_id=$marchentrefrefund&merch_ref_no=$marchentref&mid=$mid&payment_type=$paymenttypeg&service=QUERYREFUND&trans_amount=$amt&refund_amount=$refamt&refund_reason=Order $marchentref Cancelled";
+        $hsakeystr = $secret_code . $urlset;
+        $seckey = hash("sha256", $hsakeystr);
+        $ganarateurl = "&return_url=$returnUrl&goods_subject=Woodlands Order&app_pay=WEB&goods_body=$itemsdescription&api_version=2.8&lang=en&reuse=Y&active_time=300&wallet=HK";
+        $ganarateurl = $urlset . $ganarateurl . "&signature=$seckey";
+//        echo $endurl = $salesLink . "?" . $ganarateurl;
+        redirect($endurl = $salesLink . "?" . $ganarateurl);
+    }
+    
+    
+       function orderPaymentRefundNotify($order_key) {
+     
+        $returndata = $_GET;
+        
+        $paymenttype = $returndata['payment_type'];
+        $orderno = $returndata['merch_ref_no'];
+
+        if ($returndata['refund_result'] == 'SUCCESS') {
+            $productattr = array(
+                'c_date' => date('Y-m-d'),
+                'c_time' => date('H:i:s'),
+                'status' => "Payment Refund #".$returndata['merch_refund_id'],
+                'remark' => "Payment Refund Processed, Order No. ".$returndata['merch_ref_no'],
+                'description' => "Refund Id#: " . $returndata['merch_refund_id'],
+                'order_id' => $orderno
+            );
+            $this->db->insert('user_order_status', $productattr);
+            $orderlog = array(
+                'log_type' => "Payment Refund #".$returndata['merch_refund_id'],
+                'log_datetime' => date('Y-m-d H:i:s'),
+                'user_id' => "",
+                'order_id' => $orderno,
+                'log_detail' => "Payment completed using $paymenttype " . "Payment Id#: " . $returndata['merch_ref_no'],
+            );
+            $this->db->insert('system_log', $orderlog);
+            $productattr = array(
+                'status' => "Payment completed using $paymenttype ",
+                'remark' => $this->input->post('remark'),
+                'txn_no' => $returndata['order_id'],
+                'c_date' => date('Y-m-d'),
+                'c_time ' => date('H:i:s'),
+                'description' => "Payment Id#: " . $returndata['merch_ref_no'],
+                'order_id' => $orderno
+            );
+            $this->db->insert('paypal_status', $productattr);
+        }
+        if ($returndata['trans_status'] != 'SUCCESS') {
+            $productattr = array(
+                'c_date' => date('Y-m-d'),
+                'c_time' => date('H:i:s'),
+                'status' => "Payment Refund Failure",
+                'remark' => "Payment Refund ID# ".$returndata['merch_refund_id'],
+                'description' => "Payment Id#: " . $returndata['merch_ref_no'],
+                'order_id' => $orderno
+            );
+            $this->db->insert('user_order_status', $productattr);
+        }
+        redirect(site_url("Order/orderdetails/$order_key?status=Other"));
     }
 
 }
