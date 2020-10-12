@@ -873,7 +873,7 @@ class Order extends CI_Controller {
         $urlset = "merch_ref_no=$marchentref&mid=$mid&payment_type=$paymenttypeg&service=REFUND&trans_amount=$amt&refund_amount=$refamt&refund_reason=Order $marchentref Cancelled&return_url=$returnUrl";
         $hsakeystr = $secret_code . $urlset;
         $seckey = hash("sha256", $hsakeystr);
-        $ganarateurl = "&api_version=2.9";
+        $ganarateurl = "&api_version=2.8";
         $ganarateurl = $urlset . $ganarateurl . "&signature=$seckey";
         echo $endurl = $salesLink . "?" . $ganarateurl;
 //        redirect($endurl = $salesLink . "?" . $ganarateurl);
