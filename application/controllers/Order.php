@@ -869,7 +869,8 @@ class Order extends CI_Controller {
         $returnUrl = site_url("Order/orderPaymentRefundNotify/$order_key");
         $mid = $this->mid;
         $secret_code = $this->secret_code;
-        $salesLink = "http://118.140.3.194:8081/eopg_testing_env/ForexRefundRecetion";
+        $salesLink1 = "http://118.140.3.194:8081/eopg_testing_env/ForexRefundRecetion";
+        $salesLink = site_url("Order/orderPaymentRefundNotify/$order_key");
         $urlset = "merch_ref_no=$marchentref&mid=$mid&payment_type=$paymenttypeg&service=REFUND&trans_amount=$amt&refund_amount=$refamt&refund_reason=Order $marchentref Cancelled&return_url=$returnUrl";
         $hsakeystr = $secret_code . $urlset;
         $seckey = hash("sha256", $hsakeystr);
