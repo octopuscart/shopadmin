@@ -239,7 +239,7 @@ class Order_model extends CI_Model {
             $subject = SITE_NAME . " - " . $currentstatus->remark;
             $this->email->subject($subject);
             $checkcode = REPORT_MODE;
-            if ($checkcode == 0) {
+            if ($checkcode == '') {
 //                ob_clean();
                 echo $this->load->view('Email/order_mail', $order_details, true);
             } else {

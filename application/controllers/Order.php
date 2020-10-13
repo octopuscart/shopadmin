@@ -848,6 +848,99 @@ class Order extends CI_Controller {
         echo $html;
     }
 
+    public function orderRefundFnction($order_key) {
+        $order_status = $this->input->get('status');
+        $data['status'] = $order_status;
+        if ($this->user_type == 'Customer') {
+            redirect('UserManager/not_granted');
+        }
+
+
+
+
+        $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
+        $vendor_order_details = $this->Order_model->getVendorsOrder($order_key);
+        $data['vendor_order'] = $vendor_order_details;
+        if ($order_details) {
+            $order_id = $order_details['order_data']->id;
+
+            $this->db->set('order_seen', '1');
+            $this->db->where('id', $order_id); //set column_name and value in which row need to update
+            $this->db->update('user_order');
+
+            $data['ordersdetails'] = $order_details;
+            $data['order_key'] = $order_key;
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $order_id);
+            $query = $this->db->get('user_order_status');
+            $orderstatuslist = $query->result();
+
+            $currentstatus = $orderstatuslist ? $orderstatuslist[0]->status : array();
+
+            if ($order_status) {
+                
+            } else {
+                //redirecttion
+                switch ($currentstatus) {
+                    case "Order Confirmed":
+                        redirect("Order/orderdetails_payments/$order_key");
+                        break;
+
+
+                    case "Order Verifiaction":
+                        redirect("Order/orderdetails_payments/$order_key?status=Pending");
+                        break;
+
+                    case "Order Enquiry":
+                        redirect("Order/orderdetails_enquiry/$order_key");
+                        break;
+                    case "Payment Confirmed":
+                        redirect("Order/orderdetails_shipping/$order_key");
+                        break;
+                    case "Shipped":
+                        if ($order_status == 'Delivered') {
+                            
+                        } else {
+                            redirect("Order/orderdetails/$order_key/?status=Delivered");
+                        }
+                        break;
+                    default:
+
+                        echo "";
+                }
+            }
+            //end of redirection
+
+
+
+            $data['user_order_status'] = $orderstatuslist;
+            if (isset($_POST['submit'])) {
+                $productattr = array(
+                    'c_date' => date('Y-m-d'),
+                    'c_time' => date('H:i:s'),
+                    'status' => $this->input->post('status'),
+                    'remark' => $this->input->post('remark'),
+                    'description' => $this->input->post('description'),
+                    'order_id' => $order_id
+                );
+                $this->db->insert('user_order_status', $productattr);
+                if ($this->input->post('sendmail') == TRUE) {
+                    try {
+                        $this->Order_model->order_mail($order_key, "");
+                    } catch (Exception $e) {
+                        //echo 'Message: ' . $e->getMessage();
+                    }
+                }
+                redirect("Order/orderdetails/$order_key");
+            }
+        } else {
+            redirect('/');
+        }
+        $this->load->view('Order/orderdetailsrefund', $data);
+    }
+
+    
+    
     function orderRefund($order_key) {
         $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
 
@@ -871,15 +964,19 @@ class Order extends CI_Controller {
         $secret_code = $this->secret_code;
         $salesLink = "http://118.140.3.194:8081/eopg_testing_env/ForexRefundRecetion";
 //        $salesLink = site_url("Order/orderPaymentRefundNotify/$order_key");
-        $urlset = "merch_ref_no=$marchentref&mid=$mid&payment_type=$paymenttypeg&service=REFUND&trans_amount=$amt&refund_amount=$refamt&refund_reason=Order $marchentref Cancelled&return_url=$returnUrl";
+        $urlset = "merch_ref_no=$marchentref&mid=$mid&payment_type=$paymenttypeg&service=REFUND&trans_amount=$amt&refund_amount=$refamt&refund_reason=OrderCancelled&return_url=$returnUrl";
         $hsakeystr = $secret_code . $urlset;
-        $seckey = hash("sha256", $hsakeystr);
-        $ganarateurl = "&api_version=2.8";
-        $ganarateurl = $urlset . $ganarateurl . "&signature=$seckey";
+        echo $seckey = hash("sha256", $hsakeystr);
+        echo "<br/>";
+        $ganarateurl = "&api_version=2.9";
+        $ganarateurl = $urlset . $ganarateurl . "&signature=$seckey&merch_refund_id=$marchentrefrefund";
         echo $endurl = $salesLink . "?" . $ganarateurl;
 //        redirect($endurl = $salesLink . "?" . $ganarateurl);
     }
 
+    
+    
+    
     function orderRefundTest($order_key) {
         $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
 
@@ -898,12 +995,12 @@ class Order extends CI_Controller {
         $refamt = "0.10";
         $marchentref = $order_details['order_data']->order_no;
         $marchentrefrefund = $order_details['order_data']->order_no . '/R';
-        $returnUrl = site_url("Order/orderPaymentRefundNotify/$order_key");
+        $returnUrl = site_url("Order/orderPaymentRefundNotify");
         $mid = $this->mid;
         $secret_code = $this->secret_code;
         echo "<br/>";
         $salesLink = "http://118.140.3.194:8081/eopg_testing_env/refundFunction.jsp";
-        $urlset = "service=REFUND&payment_type=ALIPAY&mid=852202005040001&return_url=http://192.168.1.3/shopadmin/index.php/Order/orderPaymentRefundNotify/5aa51b1f48b984c0f400f0176d8810d9&merch_ref_no=WL2020/10/11/205&refund_amount=0.10&refund_reason=test&trans_amount=0.35";
+        $urlset = "service=REFUND&payment_type=ALIPAY&mid=852202005040001&return_url=$returnUrl&merch_ref_no=WL2020/10/11/205&refund_amount=0.10&refund_reason=test&trans_amount=0.35";
         echo $hsakeystr = $secret_code . $urlset;
         echo "<br/>--";
         $seckey = hash("sha256", $hsakeystr);
@@ -947,6 +1044,17 @@ class Order extends CI_Controller {
     function orderPaymentRefundNotify() {
 
         $returndata = $_GET;
+
+        $marchentref = $returndata['merch_ref_no'];
+        $mid = $returndata['mid'];
+        $paymenttypeg = $returndata['payment_type'];
+        $amt = "0.35";
+        $refamt = $returndata['refund_amount'];
+        $returnUrl = site_url("Order/orderPaymentRefundNotify");
+        $secret_code = $this->secret_code;
+        $urlset = "merch_ref_no=$marchentref&mid=$mid&payment_type=$paymenttypeg&service=REFUND&refund_amount=$refamt&refund_reason=Order Cancelled&return_url=$returnUrl";
+        $hsakeystr = $secret_code . $urlset;
+        echo $seckey = hash("sha256", $hsakeystr);
 
 
 
