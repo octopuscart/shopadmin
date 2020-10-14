@@ -769,7 +769,7 @@ class Order extends CI_Controller {
         $data['submitdata'] = "";
         if (isset($_POST['booknow'])) {
             $booking_order = array(
-                'name' => $this->input->post('name'),
+                'name' => strtoupper($this->input->post('name')),
                 'email' => $this->input->post('email'),
                 'contact' => $this->input->post('contact'),
                 'select_date' => $this->input->post('select_date'),
