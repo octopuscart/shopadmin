@@ -156,7 +156,7 @@ $this->load->view('layout/topmenu');
 
                         <div class="p-5rounded bg-white" style="width: 800px;
                              padding: 15px;">
-                            <h3 class="font-secondary h1 color">Book At Restaurants</h3>
+                            <h3 class="font-secondary h1 color">Edit Booking</h3>
                             <div class=" mt-4 mt-lg-0" >
                                 <div class="form-result"></div>
                                 <form class="mb-0 row"  action="#" method="post" >
