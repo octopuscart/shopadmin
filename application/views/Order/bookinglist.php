@@ -81,12 +81,13 @@ $this->load->view('layout/topmenu');
                         <thead>
                             <tr>
                                 <th style="width: 70px">S. No.</th>
-                                <th style="width:150px">Booking Information</th>
-                                <th style="width:300px">Customer Information</th>
+                                <th style="width:150px">Booking Info.</th>
+                                <th style="width:200px">Customer Information</th>
 
                                 <th style="width:150px">Booking Date/Time</th>
                                 <th style="width:150px">Source</th>
-                                <th >Remark</th>
+                                <th style="width:250px">Remark</th>
+                                <th >Action</th>
 
                             </tr>
                         </thead>
@@ -152,6 +153,11 @@ $this->load->view('layout/topmenu');
                                       
                                             echo $value->extra_remark . "<br/>";
                                             ?>
+                                        </td>
+                                        
+                                        <td>
+                                            <a class="btn btn-sm btn-danger" href="<?php echo site_url('Order/bookedit/'. $value->id);?>">Edit</a>
+                                            
                                         </td>
                                     </tr>
                                     <?php

@@ -127,10 +127,10 @@ $this->load->view('layout/topmenu');
         margin:20px 50px;
     }
     
-    .mb-3{
-        margin-bottom: 10px;
+   .mb-3{
+        padding-bottom: 10px!important;
+        border-bottom: 1px solid lightgray;
     }
-
 </style>
 
 <script>
@@ -162,20 +162,25 @@ $this->load->view('layout/topmenu');
                                         <form class="mb-0 row"  action="#" method="post" >
                                             <div class="form-process"></div>
                                             <div class="col-sm-4 mb-3">
+                                                  <lable>Name</lable>
                                                 <input type="text" id="template-contactform-name" name="name" value="" class="form-control border-form-control required" placeholder="Name" required="">
                                             </div>
                                             <div class="col-sm-4 mb-3">
+                                                <lable>Email</lable>
                                                 <input type="email" id="template-contactform-email" name="email" value="" class="required email form-control border-form-control" placeholder="Email Address" required="">
                                             </div>
                                             <div class="clear"></div>
                                             <div class="col-sm-4 mb-3">
+                                                 <lable>Contact No.</lable>
                                                 <input type="text" id="template-contactform-phone" name="contact" value="" class="form-control border-form-control required" placeholder="Contact No." required="">
                                             </div>
                                             <div class="col-sm-6 mb-3 input-daterange travel-date-group">
+                                                 <lable>Select Date</lable>
                                                 <input type="date" id="select_date" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date" min="<?php echo date('Y-m-d');?>" value="" required="">
                                             </div>
                                             <div class="clear"></div>
                                             <div class="col-md-6 mb-3">
+                                                 <lable>Select Time</lable>
                                                 <select id="template-contactform-time" class="custom-select form-control border-form-control" name="select_time" required="">
                                                     <option value="-"  selected="">Select Time</option>
                                                     <option value="12:00">12:00 - 13:00</option>
@@ -188,6 +193,7 @@ $this->load->view('layout/topmenu');
                                                 </select>
                                             </div>
                                             <div class="col-md-6 mb-3">
+                                                  <lable>Person</lable>
                                                 <select id="template-contactform-people" class="custom-select form-control border-form-control" name="people" required="">
                                                     <option value="-"  >Person</option>
                                                     <option value="1">1</option>
@@ -202,6 +208,7 @@ $this->load->view('layout/topmenu');
                                             
                                             
                                             <div class="col-md-6 mb-3">
+                                                 <lable>Booking Source</lable>
                                                 <select id="template-contactform-time" class="custom-select form-control border-form-control" name="order_source" required="">
                                                     <option value="-">Select Source</option>
                                                     <option value="Quandoo">Quandoo</option>
@@ -214,6 +221,7 @@ $this->load->view('layout/topmenu');
                                                 </select>
                                             </div>
                                             <div class="col-sm-12 mb-3">
+                                                   <lable>Extra Remark</lable>
                                                 <textarea id="template-contactform-phone" name="extra_remark" value="" class="form-control border-form-control required" placeholder="Remark" ></textarea>
                                             </div>
                                             
