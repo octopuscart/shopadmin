@@ -528,6 +528,16 @@ class Order extends CI_Controller {
         $this->Order_model->order_pdf($order_id);
     }
 
+    function order_pdf_order_key($order_key) {
+        $order_details = $this->Order_model->getOrderDetailsV2($order_key, 'key');
+        if ($order_details) {
+            $order_id = $order_details['order_data']->id;
+            $this->Order_model->order_pdf($order_id);
+        } else {
+            redirect(SITE_URL);
+        }
+    }
+
     function order_pdf_worker($order_id) {
         $this->Order_model->order_pdf_worker($order_id);
     }
@@ -838,11 +848,10 @@ class Order extends CI_Controller {
                 'log_detail' => "Booking No. #$last_id  $ordertype From Admin Panel",
             );
             $this->db->insert('system_log', $orderlog);
-            redirect("Order/bookedit/".$bookid);
+            redirect("Order/bookedit/" . $bookid);
         }
         $this->load->view('Order/booknow_edit', $data);
     }
-    
 
     public function bookinglist() {
         $data = array();
@@ -1149,6 +1158,61 @@ class Order extends CI_Controller {
             $this->db->insert('user_order_status', $productattr);
         }
         redirect(site_url("Order/orderdetails/$order_key?status=Other"));
+    }
+
+    public function deleteBookingDateBlock($date_id) {
+        $this->db->where('id', $date_id);
+        $query = $this->db->delete('booking_date_block');
+        redirect("Order/bookingDateBlock");
+    }
+
+    public function bookingDateBlock() {
+        $data = array();
+        $data['title'] = "Block Booking Date";
+        $data['description'] = "Block booking dates";
+        $data['form_title'] = "Add Blocked Date";
+        $data['table_name'] = 'booking_date_block';
+        $form_attr = array(
+            "select_date" => array("title" => "Select Date", "required" => true, "place_holder" => "Title", "type" => "date", "default" => ""),
+        );
+
+        if (isset($_POST['submitData'])) {
+            $select_date = $this->input->post("select_date");
+            $postarray = array(
+                "select_date" => $this->input->post("select_date")
+            );
+
+            $this->db->where('select_date', $select_date);
+
+            $query = $this->db->get('booking_date_block');
+            $listofdatetemp = $query->result_array();
+            if (count($listofdatetemp)) {
+                
+            } else {
+                $this->Curd_model->insert('booking_date_block', $postarray);
+            }
+            redirect("Order/bookingDateBlock");
+        }
+
+
+        $categories_data = $this->Curd_model->get('booking_date_block');
+
+
+        $cdate = date("Y-m-d");
+        $this->db->where('select_date >=', $cdate);
+        $this->db->order_by("select_date");
+        $query = $this->db->get('booking_date_block');
+        $listofdatetemp = $query->result_array();
+
+        $data['list_data'] = $listofdatetemp;
+
+        $fields = array(
+            "select_date" => array("title" => "Block Date", "width" => "200px", "edit" => 0),
+        );
+
+        $data['fields'] = $fields;
+        $data['form_attr'] = $form_attr;
+        $this->load->view('Order/bookingdateblock', $data);
     }
 
 }

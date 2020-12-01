@@ -54,6 +54,7 @@ $booking_menu = array(
     "sub_menu" => array(
         "Book Now" => site_url("Order/booknow"),
         "Booking Reports" => site_url("Order/bookinglist"),
+        "Block Dates" => site_url("Order/bookingDateBlock"),
     ),
 );
 array_push($menu_control, $booking_menu);
