@@ -176,7 +176,7 @@ $this->load->view('layout/topmenu');
                                             </div>
                                             <div class="col-sm-6 mb-3 input-daterange travel-date-group">
                                                  <lable>Select Date</lable>
-                                                <input type="date" id="select_date" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date"  value="" required="">
+                                                <input type="date" id="select_date" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date" min="<?php echo date('Y-m-d', strtotime('-30 days'));?>" value="" required="">
                                             </div>
                                             <div class="clear"></div>
                                             <div class="col-md-6 mb-3">
