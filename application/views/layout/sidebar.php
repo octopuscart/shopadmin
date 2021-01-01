@@ -65,8 +65,8 @@ $coupon_menu = array(
     "icon" => "fa fa-gift",
     "active" => "",
     "sub_menu" => array(
-        "Use Coupon" => site_url("couponManager/couponReport"),
-        "Coupon Report" => site_url("couponManager/couponUsedReport"),
+        "Use Coupon" => site_url("CouponManager/couponReport"),
+        "Coupon Report" => site_url("CouponManager/couponUsedReport"),
     ),
 );
 array_push($menu_control, $coupon_menu);
