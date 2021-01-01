@@ -63,7 +63,7 @@ $this->load->view('layout/topmenu');
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">User Coupon</button>
+                        <button type="submit" class="btn btn-primary">Reimburse</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                     </div>
