@@ -60,6 +60,18 @@ $booking_menu = array(
 array_push($menu_control, $booking_menu);
 
 
+$coupon_menu = array(
+    "title" => "Coupon Management",
+    "icon" => "fa fa-gift",
+    "active" => "",
+    "sub_menu" => array(
+        "Use Coupon" => site_url("couponManager/couponReport"),
+        "Coupon Report" => site_url("couponManager/couponUsedReport"),
+    ),
+);
+array_push($menu_control, $coupon_menu);
+
+
 $client_menu = array(
     "title" => "Client Manegement",
     "icon" => "fa fa-users",

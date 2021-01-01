@@ -25,10 +25,10 @@ $islocal = false;
 
 if (strpos($baselink, '192.168')) {
     $islocal = true;
-    $baselinkmain = 'http://' . $baselinkurl . '/shopadmin';
+    $baselinkmain = 'http://' . $baselinkurl . '/woodlandsadmin';
 } elseif (strpos($baselink, 'localhost')) {
     $islocal = true;
-    $baselinkmain = 'http://' . $baselinkurl . '/shopadmin';
+    $baselinkmain = 'http://' . $baselinkurl . '/woodlandsadmin';
 } else {
     $baselinkmain = 'https://' . $baselinkurl . '/';
 }
