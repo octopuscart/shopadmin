@@ -2,6 +2,12 @@
 $this->load->view('layout/header');
 $this->load->view('layout/topmenu');
 ?>
+<style>
+    input.coupon_id {
+        height: 25px;
+        width: 25px;
+    }
+</style>
 
 
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
@@ -14,13 +20,18 @@ $this->load->view('layout/topmenu');
         <div class="panel panel-inverse">
             <div class="panel-heading">
                 <h3 class="panel-title">Coupon Access</h3>
+
             </div>
             <div class="panel-body">
+                <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-bottom: 30px;" data-target="#couponmodalbulk" ng-if="couponcodelist.length">
+                    Reimburse Multiple Coupon(s)
+                </button>
                 <table id="tableData" class="table table-bordered ">
                     <thead>
                         <tr>
-                            <th style="width: 20px;">S.N.</th>
-                            <th style="width:250px;">Sender</th>
+                            <th style="width: 50px;">Tick Here</th>
+                          
+                            <th style="width:250px;">Buyer</th>
                             <th style="width:250px;">Receiver</th>
 
                             <th style="width:100px;">Coupon</th>
@@ -72,9 +83,55 @@ $this->load->view('layout/topmenu');
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <div class="modal fade" id="couponmodalbulk" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form ng-submit="userCouponDataBulk()">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Coupon Code(s) Reimburse</h4>
+                        <div class="modal-body">
+                            <div class="row" >
+                                <div class="col-md-6">
+                                    <div class="text-center">
+                                        {{couponcodelist.join(", ")}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-center" style="    font-size: 17px;">
+                                        Amount: {{(couponcodelist.length * 100)|currency:'<?php echo GLOBAL_CURRENCY; ?>'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="form-group">
+                                <label for="usermodel">Email / Contact No. </label>
+
+                                <input class="form-control" id="usermodel1" ng-model="formData2.email" required="" />
+
+
+
+                            </div>
+                            <div class="form-group">
+                                <label for="usermodel1">Remark</label>
+                                <input class="form-control" id="usermodel1" ng-model="formData2.remark" required="" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Reimburse</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+            </form>
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 </section>
 <!-- end col-6 -->
 </div>
+
+
 
 <script>
     var apiurl = "https://manager2.woodlandshk.com/";
