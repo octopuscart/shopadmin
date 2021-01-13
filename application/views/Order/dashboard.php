@@ -41,7 +41,7 @@ function truncate($str, $len) {
                 <div class="stats-icon"><i class="fa fa-pencil-square"></i></div>
                 <div class="stats-info">
                     <h4>Total Orders</h4>
-                    <p><?php echo count($orderslist); ?></p>	
+                    <p><?php echo $total_order; ?></p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -52,10 +52,10 @@ function truncate($str, $len) {
         <!-- begin col-3 -->
         <div class="col-md-3 col-sm-6">
             <div class="widget widget-stats bg-purple">
-                <div class="stats-icon"><i class="fa fa-usd"></i></div>
+                <div class="stats-icon"><i class="fa fa-calendar"></i></div>
                 <div class="stats-info">
-                    <h4>Total Amount</h4>
-                    <p><?php echo $total_amount; ?></p>	
+                    <h4>Total Booking</h4>
+                    <p><?php echo $total_booking; ?></p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -82,7 +82,7 @@ function truncate($str, $len) {
                 <div class="stats-icon"><i class="fa fa-desktop"></i></div>
                 <div class="stats-info">
                     <h4>TOTAL VISITORS</h4>
-                    <p>13,203</p>	
+                    <p><?php echo $total_visitor*10;?></p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -94,6 +94,8 @@ function truncate($str, $len) {
     <!-- begin row -->
     <div class="row">
         <!-- begin col-8 -->
+
+
         <div class="col-md-8">
             <div class="panel panel-inverse" data-sortable-id="index-1">
                 <div class="panel-heading">
@@ -110,33 +112,17 @@ function truncate($str, $len) {
                 </div>
             </div>
 
-            <ul class="nav nav-tabs nav-tabs-inverse nav-justified nav-justified-mobile" data-sortable-id="index-2">
-                <li class="active"><a href="#latest-post" data-toggle="tab"><i class="fa fa-picture-o m-r-5"></i> <span class="hidden-xs">Latest Post</span></a></li>
-                <li class=""><a href="#purchase" data-toggle="tab"><i class="fa fa-shopping-cart m-r-5"></i> <span class="hidden-xs">Purchase</span></a></li>
-            </ul>
-            <div class="tab-content" data-sortable-id="index-3">
-                <div class="tab-pane fade active in" id="latest-post">
-                    <div class="height-sm" data-scrollbar="true">
-                        <ul class="media-list media-list-with-divider">
-                            <?php
-                            foreach ($blog_data as $key => $value) {
-                                ?>   
-                                <li class="media media-lg">
-                                    <a href="javascript:;" class="pull-left">
-                                        <img class="media-object" src="<?php echo base_url(); ?>assets/blog_images/<?php echo $value['image']; ?>" alt=""  style="height:100px;width:100px"/>
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading"><a href='<?php echo site_url('CMS/blogDetails/' . $value['id']); ?>'><?php echo truncate($value['title'], 100); ?></a></h4>
-                                        <?php echo truncate($value['description'], 200); ?>    
-                                    </div>
-                                </li>
-                                <?php
-                            }
-                            ?>
-                        </ul>
+            <div class="panel panel-inverse" data-sortable-id="index-1">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                     </div>
+                    <h4 class="panel-title">Order Data (Last 30 Days)</h4>
                 </div>
-                <div class="tab-pane fade" id="purchase">
+                <div class="panel-body">
                     <div class="height-sm" data-scrollbar="true">
 
 
@@ -144,7 +130,7 @@ function truncate($str, $len) {
                             <thead>
                                 <tr>
                                     <th style="width: 20px">S. NO.</th>
-                                    <th style="width:250px">Order Information</th>
+                                    <th style="width:200px">Order Information</th>
                                     <th style="width:200px">Customer Information</th>
 
                                     <th>Status</th>
@@ -163,20 +149,18 @@ function truncate($str, $len) {
                                                 <?php echo $count; ?>
                                             </td>
                                             <td>
-
                                                 <table class="small_table">
                                                     <tr>
-                                                        <th>Order No.</th>
-                                                        <td>: <?php echo $value->order_no; ?></td>
+                                                        <td>
+
+                                                            <b>#<?php echo $value->order_no; ?></b>
+                                                        </td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Total Amount</th>
-                                                        <td>: {{<?php echo $value->total_price; ?>|currency:" "}}</td>
+
+                                                        <td>Amount: {{<?php echo $value->total_price; ?>|currency:" "}}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>Total Products</th>
-                                                        <td>: {{<?php echo $value->total_quantity; ?>}}</td>
-                                                    </tr>
+
                                                 </table>
 
                                             </td>
@@ -186,16 +170,17 @@ function truncate($str, $len) {
                                                 <b> <?php echo $value->name; ?></b>
                                                 <table class="small_table">
                                                     <tr>
-                                                        <th><i class="fa fa-envelope"></i> &nbsp; </th>
+
                                                         <td class="overtext"> <a href="#" title="<?php echo $value->email; ?>"><?php echo $value->email; ?></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <th><i class="fa fa-phone"></i>  &nbsp;</th>
+
                                                         <td> <?php echo $value->contact_no; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th><i class="fa fa-map-marker"></i> &nbsp; </th>
-                                                        <td> <?php echo $value->city . ", " . $value->country; ?></td>
+
+                                                        <td> <?php echo $value->zipcode; ?>
+                                                        </td>
                                                     </tr>
                                                 </table>
 
@@ -205,7 +190,6 @@ function truncate($str, $len) {
 
                                             <td>
                                                 <?php
-                                                echo "" . $value->status . "<br/>";
                                                 echo $value->status_datetime;
                                                 ?>
                                             </td>
@@ -227,8 +211,9 @@ function truncate($str, $len) {
                         </table>
                     </div>
                 </div>
-
             </div>
+
+
 
             <!-- begin col-4 -->
             <div class="col-md-6">
@@ -261,7 +246,7 @@ function truncate($str, $len) {
                             ?>
                             <li>
                                 <a href="javascript:;">
-                                    <img src = '<?php echo base_url(); ?>assets/profile_image/<?php echo $uvalue['image']; ?>' alt = ""  style = "background: url(<?php echo base_url(); ?>assets/emoji/user.png);  width:60px;  height: 60px;background-size: cover;float: left;" />
+                                    <img src = '<?php echo base_url(); ?>assets/emoji/user.png' alt = ""  style = " width:60px;  height: 60px;background-size: cover;float: left;" />
 
                                 </a>
                                 <h4 class="username text-ellipsis" style="float: left;">
@@ -277,7 +262,7 @@ function truncate($str, $len) {
 
                     </ul>
                     <div class="panel-footer text-center">
-                        <a href="<?php echo site_url("UserManager/usersReport");?>" class="text-inverse">View All</a>
+                        <a href="<?php echo site_url("UserManager/usersReport"); ?>" class="text-inverse">View All</a>
                     </div>
                 </div>
                 <!-- end panel -->
