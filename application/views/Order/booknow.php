@@ -70,7 +70,7 @@ $this->load->view('layout/topmenu');
     }
 
     .tabimage{
-             height: 40px!important;
+        height: 40px!important;
     }
 
     .tabtitle{
@@ -91,14 +91,14 @@ $this->load->view('layout/topmenu');
     }
 
     .tableimg{
-         
-            height: 40px!important;
+
+        height: 40px!important;
     }
     .tabletop {
-      
+
         background: #ececec;
         display:  inline-block;
-     
+
         text-align: center;
         border: 3px solid #ececec;
     }
@@ -126,8 +126,8 @@ $this->load->view('layout/topmenu');
         border-radius: 32px;
         margin:20px 50px;
     }
-    
-   .mb-3{
+
+    .mb-3{
         padding-bottom: 10px!important;
         border-bottom: 1px solid lightgray;
     }
@@ -153,88 +153,90 @@ $this->load->view('layout/topmenu');
 
                     <div class="row clearfix" style="    width: fit-content;">
 
-                                <div class="p-5rounded bg-white" style="width: 800px;
-                                     padding: 15px;">
-                                    <h3 class="font-secondary h1 color">Book At Restaurants</h3>
+                        <div class="p-5rounded bg-white" style="width: 800px;
+                             padding: 15px;">
+                            <h3 class="font-secondary h1 color">Book At Restaurants</h3>
 
-                                    <div class=" mt-4 mt-lg-0" >
-                                        <div class="form-result"></div>
-                                        <form class="mb-0 row"  action="#" method="post" >
-                                            <div class="form-process"></div>
-                                            <div class="col-sm-4 mb-3">
-                                                  <lable>Name</lable>
-                                                <input type="text" id="template-contactform-name" name="name" value="" class="form-control border-form-control required" placeholder="Name" required="">
-                                            </div>
-                                            <div class="col-sm-4 mb-3">
-                                                <lable>Email</lable>
-                                                <input type="email" id="template-contactform-email" name="email" value="" class="required email form-control border-form-control" placeholder="Email Address" >
-                                            </div>
-                                            <div class="clear"></div>
-                                            <div class="col-sm-4 mb-3">
-                                                 <lable>Contact No.</lable>
-                                                <input type="text" id="template-contactform-phone" name="contact" value="" class="form-control border-form-control required" placeholder="Contact No." required="">
-                                            </div>
-                                            <div class="col-sm-6 mb-3 input-daterange travel-date-group">
-                                                 <lable>Select Date</lable>
-                                                <input type="date" id="select_date" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date" min="<?php echo date('Y-m-d', strtotime('-30 days'));?>" value="" required="">
-                                            </div>
-                                            <div class="clear"></div>
-                                            <div class="col-md-6 mb-3">
-                                                 <lable>Select Time</lable>
-                                                <select id="template-contactform-time" class="custom-select form-control border-form-control" name="select_time" required="">
-                                                    <option value="-"  selected="">Select Time</option>
-                                                    <option value="12:00">12:00 - 13:00</option>
-                                                    <option value="13:00">13:00 - 14:00</option>
-                                                    <option value="14:00">14:00 - 15:00</option>
-                                                    <option value="18:00">18:00 - 19:00</option>
-                                                    <option value="19:00">19:00 - 20:00</option>
-                                                    <option value="20:00">20:00 - 21:00</option>
-                                                    <option value="21:00">21:00 - 22:00</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                  <lable>Person</lable>
-                                                <select id="template-contactform-people" class="custom-select form-control border-form-control" name="people" required="">
-                                                    <option value="-"  >Person</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6+</option>
-                                                </select>
-                                            </div>
-                                            
-                                            
-                                            
-                                            <div class="col-md-6 mb-3">
-                                                 <lable>Booking Source</lable>
-                                                <select id="template-contactform-time" class="custom-select form-control border-form-control" name="order_source" required="">
-                                                    <option value="-">Select Source</option>
-                                                    <option value="Quandoo">Quandoo</option>
-                                                    <option value="Chope">Chope</option>
-                                                    <option value="Openrice">Openrice</option>
-                                                    <option value="Woodlands Website">Woodlands Website</option>
-                                                    <option value="Telephonic">Telephonic</option>
-                                                    <option value="Walkin Guests">Walkin Guests</option>
-                                                   
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-12 mb-3">
-                                                   <lable>Extra Remark</lable>
-                                                <textarea id="template-contactform-phone" name="extra_remark" value="" class="form-control border-form-control required" placeholder="Remark" ></textarea>
-                                            </div>
-                                            
-                                            <div class="clear"></div>
-                                            <div class="col-md-12 nobottommargin">
-                                                <button class="button button-circle btn btn-lg text-white ml-0 mt-3 colordarkgreen btn btn-primary" type="submit" name="booknow" value="submit">Book Now</button>
-                                            </div>
-                                            <div class="clear"></div>
-
-                                        </form>
+                            <div class=" mt-4 mt-lg-0" >
+                                <div class="form-result"></div>
+                                <form class="mb-0 row"  action="#" method="post" >
+                                    <div class="form-process"></div>
+                                    <div class="col-sm-4 mb-3">
+                                        <lable>Name</lable>
+                                        <input type="text" id="template-contactform-name" name="name" value="" class="form-control border-form-control required" placeholder="Name" required="">
                                     </div>
-                                </div>
+                                    <div class="col-sm-4 mb-3">
+                                        <lable>Email</lable>
+                                        <input type="email" id="template-contactform-email" name="email" value="" class="required email form-control border-form-control" placeholder="Email Address" >
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="col-sm-4 mb-3">
+                                        <lable>Contact No.</lable>
+                                        <input type="text" id="template-contactform-phone" name="contact" value="" class="form-control border-form-control required" placeholder="Contact No." required="">
+                                    </div>
+                                    <div class="col-sm-6 mb-3 input-daterange travel-date-group">
+                                        <lable>Select Date</lable>
+                                        <input type="date" id="select_date" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date" min="<?php echo date('Y-m-d', strtotime('-30 days')); ?>" value="" required="">
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="col-md-6 mb-3">
+                                        <lable>Select Time</lable>
+                                        <select id="template-contactform-time" class="custom-select form-control border-form-control" name="select_time" required="">
+                                            <option value="-"  selected="">Select Time</option>
+                                            <?php
+                                            $timelist = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+                                            foreach ($timelist as $key => $value) {
+                                                ?>
+                                                <option value="<?php echo $value . ":00" ?>"><?php echo $value . ":00" ?> - <?php echo $value . ":30" ?></option>
+                                                <option value="<?php echo $value . ":30" ?>"><?php echo $value . ":30" ?> - <?php echo ($value + 1) . ":00" ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <lable>Person</lable>
+                                        <select id="template-contactform-people" class="custom-select form-control border-form-control" name="people" required="">
+                                            <option value="-"  >Person</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6+</option>
+                                        </select>
+                                    </div>
+
+
+
+                                    <div class="col-md-6 mb-3">
+                                        <lable>Booking Source</lable>
+                                        <select id="template-contactform-time" class="custom-select form-control border-form-control" name="order_source" required="">
+                                            <option value="-">Select Source</option>
+                                            <option value="Quandoo">Quandoo</option>
+                                            <option value="Chope">Chope</option>
+                                            <option value="Openrice">Openrice</option>
+                                            <option value="Woodlands Website">Woodlands Website</option>
+                                            <option value="Telephonic">Telephonic</option>
+                                            <option value="Walkin Guests">Walkin Guests</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-12 mb-3">
+                                        <lable>Extra Remark</lable>
+                                        <textarea id="template-contactform-phone" name="extra_remark" value="" class="form-control border-form-control required" placeholder="Remark" ></textarea>
+                                    </div>
+
+                                    <div class="clear"></div>
+                                    <div class="col-md-12 nobottommargin">
+                                        <button class="button button-circle btn btn-lg text-white ml-0 mt-3 colordarkgreen btn btn-primary" type="submit" name="booknow" value="submit">Book Now</button>
+                                    </div>
+                                    <div class="clear"></div>
+
+                                </form>
                             </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -271,21 +273,21 @@ $this->load->view('layout/topmenu');
 
 
         <script>
-            
-            $(function(){
-                $("#select_date").val("<?php echo date('Y-m-d');?>");
+
+            $(function () {
+                $("#select_date").val("<?php echo date('Y-m-d'); ?>");
             })
 
 <?php
 if ($submitdata == 'yes') {
     ?>
                 $(function () {
-                let newmail = new Audio("<?php echo base_url(); ?>assets/sound/sendemail.mp3");
-                newmail.play();
-                $("#thanksModal").modal("show");
-                $('#thanksModal').on('hidden.bs.modal', function (e) {
-                //            window.location = "<?php echo site_url('booknow'); ?>";
-                });
+                    let newmail = new Audio("<?php echo base_url(); ?>assets/sound/sendemail.mp3");
+                    newmail.play();
+                    $("#thanksModal").modal("show");
+                    $('#thanksModal').on('hidden.bs.modal', function (e) {
+                        //            window.location = "<?php echo site_url('booknow'); ?>";
+                    });
                 })
     <?php
 }
