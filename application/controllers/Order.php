@@ -83,7 +83,7 @@ class Order extends CI_Controller {
         $query = $this->db->get('user_order');
         $ordercount = $query->row();
         $data['total_order'] = $ordercount->order_count;
-        
+
         //booking count
         $this->db->select('count(id) as order_count');
         $query = $this->db->get('booking_order');
@@ -95,7 +95,7 @@ class Order extends CI_Controller {
         $query = $this->db->get('admin_users');
         $userlist = $query->row();
         $data['total_users'] = $userlist->total_users;
-        
+
         //visitore count
         $this->db->select('count(id) as total_users');
         $query = $this->db->get('ci_sessions');
@@ -115,6 +115,47 @@ class Order extends CI_Controller {
         $query = $this->db->get('system_log');
         $systemlog = $query->result_array();
         $data['systemlog'] = $systemlog;
+
+        //booking future data;
+        $date1 = date('Y-m-d', strtotime('+30 days'));
+        $date2 = date('Y-m-d');
+        $queryraw = "SELECT select_date, name, contact, email, select_time  FROM booking_order where select_date between '$date2' and '$date1' group by select_date order by select_date desc";
+        $queryraw2 = $this->db->query($queryraw);
+        $booking_dates = $queryraw2->result_array();
+        $data['future_booking'] = $booking_dates;
+
+        //booking graph
+        $date1 = date('Y-m-d', strtotime('-30 days'));
+        $date2 = date('Y-m-d');
+        $queryraw = "SELECT select_date, count(id) as count FROM booking_order where select_date between '$date1' and '$date2' group by select_date order by select_date desc";
+        $queryraw2 = $this->db->query($queryraw);
+        $booking_dates = $queryraw2->result_array();
+        $booking_dates_array = array();
+        foreach ($booking_dates as $key => $value) {
+            $booking_dates_array[$value['select_date']] = $value['count'];
+        }
+
+        //order datess
+        $queryrawo = "SELECT order_date, count(id) as count FROM user_order where order_date between '$date1' and '$date2' group by order_date order by order_date desc";
+        $queryrawo2 = $this->db->query($queryrawo);
+        $order_dates = $queryrawo2->result_array();
+        $order_dates_array = array();
+        foreach ($order_dates as $key => $value) {
+            $order_dates_array[$value['order_date']] = $value['count'];
+        }
+
+        $listofdates = array();
+        for ($i = 30; $i >= 0; $i--) {
+            $tdate = date('Y-m-d', strtotime("-$i days"));
+            $listofdates[$tdate] = array(
+                "order" => isset($order_dates_array[$tdate]) ? $order_dates_array[$tdate] : 0,
+                "booking" => isset($booking_dates_array[$tdate]) ? $booking_dates_array[$tdate] : 0
+            );
+        }
+
+        $data['order_booking_date_list'] = $listofdates;
+
+
 
 
         $this->load->view('Order/dashboard', $data);

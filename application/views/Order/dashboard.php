@@ -82,7 +82,7 @@ function truncate($str, $len) {
                 <div class="stats-icon"><i class="fa fa-desktop"></i></div>
                 <div class="stats-info">
                     <h4>TOTAL VISITORS</h4>
-                    <p><?php echo $total_visitor*10;?></p>	
+                    <p><?php echo $total_visitor; ?></p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -94,32 +94,24 @@ function truncate($str, $len) {
     <!-- begin row -->
     <div class="row">
         <!-- begin col-8 -->
-
-
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="panel panel-inverse" data-sortable-id="index-1">
                 <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                    </div>
+                    
                     <h4 class="panel-title">Website Analytics (Last 7 Days)</h4>
                 </div>
                 <div class="panel-body">
-                    <div id="interactive-chart" class="height-sm"></div>
+                    <div id="interactive-chart2" class="height-sm"></div>
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-8">
+
 
             <div class="panel panel-inverse" data-sortable-id="index-1">
                 <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                    </div>
+                    
                     <h4 class="panel-title">Order Data (Last 30 Days)</h4>
                 </div>
                 <div class="panel-body">
@@ -216,24 +208,7 @@ function truncate($str, $len) {
 
 
             <!-- begin col-4 -->
-            <div class="col-md-6">
-                <!-- begin panel -->
-                <div class="panel panel-inverse" data-sortable-id="index-10">
-                    <div class="panel-heading">
-                        <div class="panel-heading-btn">
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                        </div>
-                        <h4 class="panel-title">Calendar</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div id="datepicker-inline" class="datepicker-full-width"><div></div></div>
-                    </div>
-                </div>
-                <!-- end panel -->
-            </div>
+           
             <div class="col-md-6">
                 <!-- begin panel -->
                 <div class="panel panel-inverse" data-sortable-id="index-4">
@@ -249,9 +224,9 @@ function truncate($str, $len) {
                                     <img src = '<?php echo base_url(); ?>assets/emoji/user.png' alt = ""  style = " width:60px;  height: 60px;background-size: cover;float: left;" />
 
                                 </a>
-                                <h4 class="username text-ellipsis" style="float: left;">
+                                <h4 class="username text-ellipsis" style="float: left;width: -webkit-fill-available;">
                                     <?php echo $uvalue['first_name']; ?> <?php echo $uvalue['last_name']; ?>
-                                    <small><?php echo $uvalue['country']; ?></small>
+
                                 </h4>
                             </li>
                             <?php
@@ -272,84 +247,32 @@ function truncate($str, $len) {
         <!-- end col-8 -->
         <!-- begin col-4 -->
         <div class="col-md-4">
-            <div class="panel panel-inverse" data-sortable-id="index-6">
+            <div class="panel panel-inverse" data-sortable-id="index-3">
                 <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                    </div>
-                    <h4 class="panel-title">Analytics Details</h4>
+                    <h4 class="panel-title">Next 30 Days Booking</h4>
                 </div>
-                <div class="panel-body p-t-0">
-                    <table class="table table-valign-middle m-b-0">
-                        <thead>
-                            <tr>	
-                                <th>Source</th>
-                                <th>Total</th>
-                                <th>Trend</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><label class="label label-danger">Total Visitor</label></td>
-                                <td>13,203 <span class="text-success"><i class="fa fa-arrow-up"></i></span></td>
-                                <td><div id="sparkline-unique-visitor"></div></td>
-                            </tr>
-                            <tr>
-                                <td><label class="label label-warning">Total Order</label></td>
-                                <td>1200</td>
-                                <td><div id="sparkline-bounce-rate"></div></td>
-                            </tr>
-                            <tr>
-                                <td><label class="label label-success">Total Page Views</label></td>
-                                <td>1,230,030</td>
-                                <td><div id="sparkline-total-page-views"></div></td>
-                            </tr>
-                            <tr>
-                                <td><label class="label label-primary">Avg Time On Site</label></td>
-                                <td>00:03:45</td>
-                                <td><div id="sparkline-avg-time-on-site"></div></td>
-                            </tr>
-                            <tr>
-                                <td><label class="label label-default">% New Visits</label></td>
-                                <td>40.5%</td>
-                                <td><div id="sparkline-new-visits"></div></td>
-                            </tr>
-                            <tr>
-                                <td><label class="label label-inverse">Return Visitors</label></td>
-                                <td>73.4%</td>
-                                <td><div id="sparkline-return-visitors"></div></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div id="schedule-calendar2" class="bootstrap-calendar"></div>
+                <div class="list-group">
+                    <?php
+                    foreach ($future_booking as $key => $value) {
+                        $orgdata = date("dS M y", strtotime($value['select_date']));
+                        ?>
+                        <a href="#" class="list-group-item text-ellipsis">
+                            <span class="badge badge-success"><?php echo $orgdata." ".$value['select_time'];?></span> 
+                            Name:<?php echo $value['name'];?><br/>
+                           
+                        </a> 
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
 
-            <div class="panel panel-inverse" data-sortable-id="index-9">
-                <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                    </div>
-                    <h4 class="panel-title">World Visitors</h4>
-                </div>
-                <div class="panel-body p-0">
-                    <div id="world-map" class="height-sm width-full"></div>
-                </div>
-            </div>
+           
 
             <div class="panel panel-inverse" data-sortable-id="index-8">
                 <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                    </div>
+                   
                     <h4 class="panel-title">Todo List</h4>
                 </div>
                 <div class="panel-body p-0">
@@ -360,7 +283,7 @@ function truncate($str, $len) {
                             ?>   
                             <li>
                                 <a href="javascript:;" class="todolist-container" data-click="todolist">
-                                    <div class="todolist-input"><i class="fa fa-square-o"></i></div>
+                                   
                                     <div class="todolist-title"><?php echo $vlog['log_detail']; ?> (<?php echo $vlog['log_datetime']; ?>)</div>
                                 </a>
                             </li> 
@@ -429,4 +352,167 @@ if ($checklogin['show']) {
 }
 ?>
                 })
+
+
+                var handleInteractiveChart = function () {
+                    "use strict";
+                    function showTooltip(x, y, contents) {
+                        $('<div id="tooltip" class="flot-tooltip">' + contents + '</div>').css({
+                            top: y - 45,
+                            left: x - 55
+                        }).appendTo("body").fadeIn(200);
+                    }
+                    if ($('#interactive-chart2').length !== 0) {
+
+                        var data1 = [
+<?php
+$listoforderbooking = [];
+$count1 = 1;
+foreach ($order_booking_date_list as $key => $value) {
+    $orddata = $value['order'];
+    echo "[$count1, $orddata],";
+    array_push($listoforderbooking, $orddata);
+    $count1++;
+}
+?>
+                        ];
+                        var data2 = [
+<?php
+$count2 = 1;
+foreach ($order_booking_date_list as $key => $value) {
+    $bkdata = $value['booking'];
+    echo "[$count2, $bkdata],";
+    array_push($listoforderbooking, $bkdata);
+    $count2++;
+}
+?>
+                        ];
+                        var xLabel = [
+
+<?php
+$count3 = 1;
+foreach ($order_booking_date_list as $key => $value) {
+    $orgdata = date("dS M Y", strtotime($key));
+    $orgdata2 = date("d", strtotime($key));
+    if ($count3 % 3 == 0) {
+        echo "[$count3, '$orgdata'],";
+    } else {
+        echo "[$count3, '$orgdata2'],";
+    }
+    $count3++;
+}
+
+$maxdatagraph = max($listoforderbooking) * 2;
+?>
+                        ];
+                        $.plot($("#interactive-chart2"), [
+                            {
+                                data: data1,
+                                label: "Orders",
+                                color: blue,
+                                lines: {show: true, fill: false, lineWidth: 2},
+                                points: {show: true, radius: 3, fillColor: '#fff'},
+                                shadowSize: 0
+                            }, {
+                                data: data2,
+                                label: 'Booking',
+                                color: "#f59c1a",
+                                lines: {show: true, fill: false, lineWidth: 2},
+                                points: {show: true, radius: 3, fillColor: '#fff'},
+                                shadowSize: 0
+                            }
+                        ],
+                                {
+                                    xaxis: {ticks: xLabel, tickDecimals: 1, tickColor: '#ddd'},
+                                    yaxis: {ticks: 10, tickColor: '#ddd', min: 0, max: <?php echo $maxdatagraph; ?>},
+                                    grid: {
+                                        hoverable: true,
+                                        clickable: true,
+                                        tickColor: "#ddd",
+                                        borderWidth: 1,
+                                        backgroundColor: '#fff',
+                                        borderColor: '#ddd'
+                                    },
+                                    legend: {
+                                        labelBoxBorderColor: '#ddd',
+                                        margin: 10,
+                                        noColumns: 1,
+                                        show: true
+                                    }
+                                }
+                        );
+                        var previousPoint = null;
+                        $("#interactive-chart2").bind("plothover", function (event, pos, item) {
+                            $("#x").text(pos.x.toFixed(2));
+                            $("#y").text(pos.y.toFixed(2));
+                            if (item) {
+                                if (previousPoint !== item.dataIndex) {
+                                    previousPoint = item.dataIndex;
+                                    $("#tooltip").remove();
+                                    var y = item.datapoint[1].toFixed(2);
+
+                                    var content = item.series.label + " " + y;
+                                    showTooltip(item.pageX, item.pageY, content);
+                                }
+                            } else {
+                                $("#tooltip").remove();
+                                previousPoint = null;
+                            }
+                            event.preventDefault();
+                        });
+                    }
+                };
+                handleInteractiveChart();
+
+
+                var handleScheduleCalendar = function () {
+                    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    var dayNames = ["S", "M", "T", "W", "T", "F", "S"];
+
+                    var now = new Date(),
+                            month = now.getMonth() + 1,
+                            year = now.getFullYear();
+
+                    var events = [
+<?php
+foreach ($future_booking as $key => $value) {
+    $orgdata = date("j/n/Y", strtotime($value['select_date']));
+    ?>
+
+                            [
+                                    '<?php echo $orgdata; ?>',
+                                    '<?php echo "Name: " . $value['name']; ?>,  <?php echo "Time: " . $value['select_time']; ?>',
+                                                        '<?php echo "Time: " . $value['select_time']; ?>',
+                                                        '#2d353c',
+                                                ],
+    <?php
+}
+?>
+                                        ];
+                                        var calendarTarget = $('#schedule-calendar2');
+                                        $(calendarTarget).calendar({
+                                            months: monthNames,
+                                            days: dayNames,
+                                            events: events,
+                                            popover_options: {
+                                                placement: 'top',
+                                                html: true
+                                            }
+                                        });
+                                        $(calendarTarget).find('td.event').each(function () {
+                                            var backgroundColor = $(this).css('background-color');
+                                            $(this).removeAttr('style');
+                                            $(this).find('a').css('background-color', backgroundColor);
+                                        });
+                                        $(calendarTarget).find('.icon-arrow-left, .icon-arrow-right').parent().on('click', function () {
+                                            $(calendarTarget).find('td.event').each(function () {
+                                                var backgroundColor = $(this).css('background-color');
+                                                $(this).removeAttr('style');
+                                                $(this).find('a').css('background-color', backgroundColor);
+                                            });
+                                        });
+                                    };
+
+
+
 </script>
