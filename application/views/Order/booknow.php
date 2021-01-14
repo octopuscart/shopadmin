@@ -199,7 +199,7 @@ $this->load->view('layout/topmenu');
                                         <select id="template-contactform-people" class="custom-select form-control border-form-control" name="people" required="">
                                             <option value="-"  >Person</option>
                                             <option value="1">1</option>
-                                            <option value="2">2</option>
+                                            <option value="2" selected="">2</option>
                                             <option value="3">3</option>
                                             <option value="4">4</option>
                                             <option value="5">5</option>
