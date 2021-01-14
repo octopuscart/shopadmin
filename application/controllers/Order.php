@@ -118,8 +118,9 @@ class Order extends CI_Controller {
 
         //booking future data;
         $date1 = date('Y-m-d', strtotime('+30 days'));
-        $date2 = date('Y-m-d');
-        $queryraw = "SELECT select_date, name, contact, email, select_time  FROM booking_order where select_date between '$date2' and '$date1' group by select_date order by select_date desc";
+        $date2 = date('Y-m-d', strtotime('-30 days'));
+        $cdate = date("Y-m-d");
+        $queryraw = "SELECT select_date, name, contact, email, select_time, if('$cdate'<=select_date,'n','p') as date_stats  FROM booking_order where select_date between '$date2' and '$date1' group by select_date order by select_date desc";
         $queryraw2 = $this->db->query($queryraw);
         $booking_dates = $queryraw2->result_array();
         $data['future_booking'] = $booking_dates;

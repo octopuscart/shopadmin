@@ -97,8 +97,8 @@ function truncate($str, $len) {
         <div class="col-md-12">
             <div class="panel panel-inverse" data-sortable-id="index-1">
                 <div class="panel-heading">
-                    
-                    <h4 class="panel-title">Website Analytics (Last 7 Days)</h4>
+
+                    <h4 class="panel-title">Order & Booking Analytics (Last 30 Days)</h4>
                 </div>
                 <div class="panel-body">
                     <div id="interactive-chart2" class="height-sm"></div>
@@ -111,7 +111,7 @@ function truncate($str, $len) {
 
             <div class="panel panel-inverse" data-sortable-id="index-1">
                 <div class="panel-heading">
-                    
+
                     <h4 class="panel-title">Order Data (Last 30 Days)</h4>
                 </div>
                 <div class="panel-body">
@@ -208,7 +208,7 @@ function truncate($str, $len) {
 
 
             <!-- begin col-4 -->
-           
+
             <div class="col-md-6">
                 <!-- begin panel -->
                 <div class="panel panel-inverse" data-sortable-id="index-4">
@@ -249,30 +249,36 @@ function truncate($str, $len) {
         <div class="col-md-4">
             <div class="panel panel-inverse" data-sortable-id="index-3">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Next 30 Days Booking</h4>
+                    <h4 class="panel-title">Booking Data (Last 30 Days & Next 30 Days)</h4>
                 </div>
                 <div id="schedule-calendar2" class="bootstrap-calendar"></div>
                 <div class="list-group">
+                    <a href="#" class="list-group-item text-ellipsis active">
+                        Upcoming Bookings
+
+                    </a> 
                     <?php
                     foreach ($future_booking as $key => $value) {
                         $orgdata = date("dS M y", strtotime($value['select_date']));
-                        ?>
-                        <a href="#" class="list-group-item text-ellipsis">
-                            <span class="badge badge-success"><?php echo $orgdata." ".$value['select_time'];?></span> 
-                            Name:<?php echo $value['name'];?><br/>
-                           
-                        </a> 
-                        <?php
+                        if ($value["date_stats"] == 'n') {
+                            ?>
+                            <a href="#" class="list-group-item text-ellipsis">
+                                <span class="badge badge-success"><?php echo $orgdata . " " . $value['select_time']; ?></span> 
+                                Name:<?php echo $value['name']; ?><br/>
+
+                            </a> 
+                            <?php
+                        }
                     }
                     ?>
                 </div>
             </div>
 
-           
+
 
             <div class="panel panel-inverse" data-sortable-id="index-8">
                 <div class="panel-heading">
-                   
+
                     <h4 class="panel-title">Todo List</h4>
                 </div>
                 <div class="panel-body p-0">
@@ -283,7 +289,7 @@ function truncate($str, $len) {
                             ?>   
                             <li>
                                 <a href="javascript:;" class="todolist-container" data-click="todolist">
-                                   
+
                                     <div class="todolist-title"><?php echo $vlog['log_detail']; ?> (<?php echo $vlog['log_datetime']; ?>)</div>
                                 </a>
                             </li> 
@@ -477,41 +483,52 @@ $maxdatagraph = max($listoforderbooking) * 2;
 <?php
 foreach ($future_booking as $key => $value) {
     $orgdata = date("j/n/Y", strtotime($value['select_date']));
-    ?>
+    if ($value["date_stats"] == 'p') {
+        ?>
 
                             [
                                     '<?php echo $orgdata; ?>',
                                     '<?php echo "Name: " . $value['name']; ?>,  <?php echo "Time: " . $value['select_time']; ?>',
-                                                        '<?php echo "Time: " . $value['select_time']; ?>',
-                                                        '#2d353c',
-                                                ],
-    <?php
+                                                    '<?php echo "Time: " . $value['select_time']; ?>',
+                                                    '#d9e0e7',
+                                            ],
+        <?php
+    } else {
+        ?>
+                                            [
+                                                    '<?php echo $orgdata; ?>',
+                                                    '<?php echo "Name: " . $value['name']; ?>,  <?php echo "Time: " . $value['select_time']; ?>',
+                                                                    '<?php echo "Time: " . $value['select_time']; ?>',
+                                                                    '#2d353c',
+                                                            ],
+        <?php
+    }
 }
 ?>
-                                        ];
-                                        var calendarTarget = $('#schedule-calendar2');
-                                        $(calendarTarget).calendar({
-                                            months: monthNames,
-                                            days: dayNames,
-                                            events: events,
-                                            popover_options: {
-                                                placement: 'top',
-                                                html: true
-                                            }
-                                        });
-                                        $(calendarTarget).find('td.event').each(function () {
-                                            var backgroundColor = $(this).css('background-color');
-                                            $(this).removeAttr('style');
-                                            $(this).find('a').css('background-color', backgroundColor);
-                                        });
-                                        $(calendarTarget).find('.icon-arrow-left, .icon-arrow-right').parent().on('click', function () {
-                                            $(calendarTarget).find('td.event').each(function () {
-                                                var backgroundColor = $(this).css('background-color');
-                                                $(this).removeAttr('style');
-                                                $(this).find('a').css('background-color', backgroundColor);
-                                            });
-                                        });
-                                    };
+                                                    ];
+                                                    var calendarTarget = $('#schedule-calendar2');
+                                                    $(calendarTarget).calendar({
+                                                        months: monthNames,
+                                                        days: dayNames,
+                                                        events: events,
+                                                        popover_options: {
+                                                            placement: 'top',
+                                                            html: true
+                                                        }
+                                                    });
+                                                    $(calendarTarget).find('td.event').each(function () {
+                                                        var backgroundColor = $(this).css('background-color');
+                                                        $(this).removeAttr('style');
+                                                        $(this).find('a').css('background-color', backgroundColor);
+                                                    });
+                                                    $(calendarTarget).find('.icon-arrow-left, .icon-arrow-right').parent().on('click', function () {
+                                                        $(calendarTarget).find('td.event').each(function () {
+                                                            var backgroundColor = $(this).css('background-color');
+                                                            $(this).removeAttr('style');
+                                                            $(this).find('a').css('background-color', backgroundColor);
+                                                        });
+                                                    });
+                                                };
 
 
 
