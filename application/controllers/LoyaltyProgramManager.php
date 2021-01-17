@@ -6,7 +6,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ob_start();
 
-class loyaltyProgramManager extends CI_Controller {
+class LoyaltyProgramManager extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -25,7 +25,7 @@ class loyaltyProgramManager extends CI_Controller {
         $data = array();
         $data['title'] = '';
         if(isset($_POST['booknow'])){
-            redirect("loyaltyProgramManager/createBilling");
+            redirect("LoyaltyProgramManager/createBilling");
         }
         $this->load->view('loyaltyManager/createBilling', $data);
     }

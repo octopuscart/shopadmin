@@ -76,8 +76,8 @@ $loyalty_menu = array(
     "icon" => "fa fa-trophy",
     "active" => "",
     "sub_menu" => array(
-        "Members List" => site_url("loyaltyProgramManager/membersList"),
-        "Create Billing" => site_url("loyaltyProgramManager/createBilling"),
+        "Members List" => site_url("LoyaltyProgramManager/membersList"),
+        "Create Billing" => site_url("LoyaltyProgramManager/createBilling"),
     ),
 );
 array_push($menu_control, $loyalty_menu);
