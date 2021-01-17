@@ -105,7 +105,8 @@ $this->load->view('layout/topmenu');
 
 <script>
     var apiurl = "https://manager2.woodlandshk.com/";
-    var apiurl = "http://localhost/woodlandcoupon/index.php/";</script>
+//    var apiurl = "http://localhost/woodlandcoupon/index.php/";
+</script>
 
 <script src="<?php echo base_url(); ?>assets/plugins/DataTables/js/jquery.dataTables.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/table-manage-default.demo.min.js"></script>
