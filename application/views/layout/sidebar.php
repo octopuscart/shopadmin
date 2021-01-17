@@ -71,6 +71,17 @@ $coupon_menu = array(
 );
 array_push($menu_control, $coupon_menu);
 
+$loyalty_menu = array(
+    "title" => "Loyalty Prgram",
+    "icon" => "fa fa-trophy",
+    "active" => "",
+    "sub_menu" => array(
+        "Members List" => site_url("loyaltyProgramManager/membersList"),
+        "Create Billing" => site_url("loyaltyProgramManager/createBilling"),
+    ),
+);
+array_push($menu_control, $loyalty_menu);
+
 
 $client_menu = array(
     "title" => "Client Manegement",
