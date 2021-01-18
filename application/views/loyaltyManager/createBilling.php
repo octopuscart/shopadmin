@@ -70,6 +70,32 @@ $this->load->view('layout/topmenu');
 
 <!-- Main content -->
 <section class="content" ng-controller="CreateBillingController">
+
+    <div class="col-md-8">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <h3 class="panel-title">Loyalty Program Members</h3>
+
+            </div>
+            <div class="panel-body">
+                <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-bottom: 30px;" data-target="#couponmodalbulk" ng-if="couponcodelist.length">
+                    Reimburse Multiple Coupon(s)
+                </button>
+                <table id="tableData" class="table table-bordered ">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">Sn. No.</th>
+                            <th style="width:250px;">Name</th>
+                            <th style="width:150px;">Contact No./Email</th>
+                            <th style="width: 100px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <div class="col-md-4">
         <div class="panel panel-inverse" data-sortable-id="index-10">
             <div class="panel-heading">
@@ -110,7 +136,7 @@ $this->load->view('layout/topmenu');
 
                                 <div class=" row">
                                     <div class="col-sm-12 mb-3">
-                                        <lable>Order No.</lable>
+                                        <lable>Invoice/Order No.</lable>
                                         <input type="text"  name="order_no" value=""  ng-model="formData.order_no" class="required email form-control border-form-control" placeholder="Order No."  required="">
                                     </div>
 
@@ -118,7 +144,13 @@ $this->load->view('layout/topmenu');
                                 <div ng-if="formData.reimburse_status">
                                     <div ng-if="billing.alertmessage" class='alert alert-danger' style="margin-top: 10px">
                                         {{billing.alertmessage}}
+
                                     </div>
+                                    <div ng-if="formData.wallet_input" class='alert alert-success' style="margin-top: 10px;font-size: 15px;">
+                                        {{formData.wallet_input|currency}} Will be credit on wallet
+
+                                    </div>
+
                                 </div>
                                 <div class="form-group-lg row">
                                     <div class="col-sm-7 mb-3">
@@ -140,7 +172,10 @@ $this->load->view('layout/topmenu');
                                     <tr>
                                         <th> <span>Total Orders Amount</span></th>
                                         <th><span>Applicable Off</span></th>
-                                        <th><span>Total Reimbursement Amount</span></th>
+                                        <th>
+                                            <span>Total Reimbursement Amount</span><br/>
+                                            
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td>    
@@ -151,6 +186,12 @@ $this->load->view('layout/topmenu');
                                         </td>
                                         <td >
                                             <h3>{{billing.reimburse_amount| currency}}</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                      
+                                        <td colspan="3" style="font-size: 10px;text-align: right;">
+                                            {{billing.off_amount| currency}} (Off On Order) + {{billing.wallet_amount| currency}} (Wallet)
                                         </td>
                                     </tr>
                                     <tr>
@@ -185,9 +226,10 @@ $this->load->view('layout/topmenu');
                                         <lable>Order Type</lable>
                                         <select  class="custom-select form-control border-form-control" name="order_type" required="" ng-model="formData.order_type" >
 
-                                            <option value="Offline Restaurant">Offline At Restaurant</option>
+                                            <option value="At Restaurant">At Restaurant</option>
                                             <option value="Pickup">Pickup</option>
-                                            <option value="Online Delivery">Online Delivery</option>
+                                            <option value="Delivery">Delivery</option>
+                                            <option value="Other">Other</option>
 
                                         </select>
                                     </div>
@@ -213,30 +255,6 @@ $this->load->view('layout/topmenu');
         </div>
 
     </div>
-    <div class="col-md-8">
-        <div class="panel panel-inverse">
-            <div class="panel-heading">
-                <h3 class="panel-title">Loyalty Program Members</h3>
-
-            </div>
-            <div class="panel-body">
-                <button type="button" class="btn btn-primary" data-toggle="modal" style="margin-bottom: 30px;" data-target="#couponmodalbulk" ng-if="couponcodelist.length">
-                    Reimburse Multiple Coupon(s)
-                </button>
-                <table id="tableData" class="table table-bordered ">
-                    <thead>
-                        <tr>
-                            <th style="width: 50px;">Sn. No.</th>
-                            <th style="width:250px;">Name</th>
-                            <th style="width:150px;">Contact No./Email</th>
-                            <th style="width: 100px;"></th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 
 </section>
 <!-- end col-6 -->
@@ -246,8 +264,7 @@ $this->load->view('layout/topmenu');
 
 <script>
     var apiurl = "https://manager2.woodlandshk.com/";
-//    var apiurl = "http://localhost/woodlandcoupon/index.php/";
-</script>
+    var apiurl = "http://localhost/woodlandcoupon/index.php/";</script>
 
 <script src="<?php echo base_url(); ?>assets/plugins/DataTables/js/jquery.dataTables.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/table-manage-default.demo.min.js"></script>
