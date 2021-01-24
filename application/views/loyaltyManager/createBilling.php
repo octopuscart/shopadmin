@@ -59,6 +59,9 @@ $this->load->view('layout/topmenu');
 
 
     }
+     .opacity_05{
+            opacity: 0.5;
+    }
 </style>
 
 
@@ -170,7 +173,7 @@ $this->load->view('layout/topmenu');
                                 <hr/>
                                 <table class="table amounttable">
                                     <tr>
-                                        <th> <span>Total Orders Amount</span></th>
+                                        <th> <span>Total Order Amount</span></th>
                                         <th><span>Applicable Off</span></th>
                                         <th>
                                             <span>Total Reimbursement Amount</span><br/>
@@ -178,19 +181,19 @@ $this->load->view('layout/topmenu');
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td>    
-                                            <h3>{{billing.total_amount| currency}}</h3>
+                                         <td>    
+                                            <h3 class="opacity_05">{{billing.total_amount| currency}}</h3>
                                         </td>
                                         <td>
-                                            <h3>{{billing.slot.off_percent}}%</h3>
+                                            <h3 class="opacity_05">{{billing.slot.off_percent}}%</h3>
                                         </td>
                                         <td >
-                                            <h3>{{billing.reimburse_amount| currency}}</h3>
+                                            <h3 class="">{{billing.reimburse_amount| currency}}</h3>
                                         </td>
                                     </tr>
                                     <tr>
                                       
-                                        <td colspan="3" style="font-size: 10px;text-align: right;">
+                                        <td colspan="3" style="font-size: 10px;text-align: right;color:black;">
                                             {{billing.off_amount| currency}} (Off On Order) + {{billing.wallet_amount| currency}} (Wallet)
                                         </td>
                                     </tr>
@@ -264,7 +267,7 @@ $this->load->view('layout/topmenu');
 
 <script>
     var apiurl = "https://manager2.woodlandshk.com/";
-//    var apiurl = "http://localhost/woodlandcoupon/index.php/";
+    var apiurl = "http://localhost/woodlandcoupon/index.php/";
 </script>
 
 <script src="<?php echo base_url(); ?>assets/plugins/DataTables/js/jquery.dataTables.js"></script>
