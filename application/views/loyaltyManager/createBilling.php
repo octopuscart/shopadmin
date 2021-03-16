@@ -243,10 +243,10 @@ $this->load->view('layout/topmenu');
 
                                     <div class="clear"></div>
                                     <div class="col-md-12 nobottommargin" style="margin-top: 20px;" ng-if="billing.select_memeber.member_id">
-                                        <button class="button button-circle btn btn-lg text-white ml-0 mt-3 colordarkgreen btn btn-primary" type="submit" name="booknow" value="submit">Book Now</button>
+                                        <button class="button button-circle btn btn-lg text-white ml-0 mt-3 colordarkgreen btn btn-primary" type="submit" name="booknow" value="submit">Submit</button>
                                     </div>
                                     <div class="col-md-12 nobottommargin" style="margin-top: 20px;" ng-if="billing.select_memeber.member_id =="">
-                                        <button class="button button-circle btn btn-lg text-white ml-0 mt-3 colordarkgreen btn btn-primary" type="button" disabled="" name="booknow" value="submit">Book Now</button>
+                                        <button class="button button-circle btn btn-lg text-white ml-0 mt-3 colordarkgreen btn btn-primary" type="button" disabled="" name="booknow" value="submit">Submit</button>
                                     </div>
                                     <div class="clear"></div>
                                 </div>
