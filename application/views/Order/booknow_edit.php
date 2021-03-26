@@ -176,20 +176,22 @@ $this->load->view('layout/topmenu');
                                     </div>
                                     <div class="col-sm-6 mb-3 input-daterange travel-date-group">
                                          <lable>Select Date</lable>
-                                        <input type="date" id="select_date" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date" min="<?php echo date('Y-m-d'); ?>" value="<?php echo $bookdetails->select_date; ?>" required="">
+                                        <input type="date" id="select_date" name="select_date" value="" class="form-control border-form-control  required" placeholder="Select Reservation Date" value="<?php echo $bookdetails->select_date; ?>" required="">
                                     </div>
                                     <div class="clear"></div>
                                     <div class="col-md-6 mb-3">
                                          <lable>Select Time</lable>
                                         <select id="idselecttime" class="custom-select form-control border-form-control" name="select_time" required="">
                                             <option value="-"  selected="">Select Time</option>
-                                            <option value="12:00">12:00 - 13:00</option>
-                                            <option value="13:00">13:00 - 14:00</option>
-                                            <option value="14:00">14:00 - 15:00</option>
-                                            <option value="18:00">18:00 - 19:00</option>
-                                            <option value="19:00">19:00 - 20:00</option>
-                                            <option value="20:00">20:00 - 21:00</option>
-                                            <option value="21:00">21:00 - 22:00</option>
+                                              <?php
+                                            $timelist = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+                                            foreach ($timelist as $key => $value) {
+                                                ?>
+                                                <option value="<?php echo $value . ":00" ?>"><?php echo $value . ":00" ?> - <?php echo $value . ":30" ?></option>
+                                                <option value="<?php echo $value . ":30" ?>"><?php echo $value . ":30" ?> - <?php echo ($value + 1) . ":00" ?></option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -227,7 +229,7 @@ $this->load->view('layout/topmenu');
 
                                     <div class="clear"></div>
                                     <div class="col-md-12 nobottommargin">
-                                        <button class="button button-circle btn btn-lg text-white ml-0 mt-3 colordarkgreen btn btn-primary" type="submit" name="booknow" value="submit">Book Now</button>
+                                        <button class="button button-circle btn btn-lg text-white ml-0 mt-3 colordarkgreen btn btn-primary" type="submit" name="booknow" value="submit">Update Booking</button>
                                     </div>
                                     <div class="clear"></div>
 
