@@ -119,8 +119,8 @@ class Api extends REST_Controller {
             'total_price' => $this->post('total'),
             'payment_mode' => $this->post('payment_method'),
             'status' => "Processing",
-            'user_id' => $this->post('user_id') ? $this->post('user_id') :'Guest',
-            'order_key' => $this->post('user_id') ? $this->post('user_id') :'Guest',
+            'user_id' => $this->post('user_id') ? $this->post('user_id') : 'Guest',
+            'order_key' => $this->post('user_id') ? $this->post('user_id') : 'Guest',
         );
         $this->db->insert('user_order', $web_order);
 
@@ -139,7 +139,7 @@ class Api extends REST_Controller {
             'c_time' => date('H:i:s'),
             'order_id' => $last_id,
             'status' => "Order Confirmed",
-            'user_id' => $this->post('user_id') ? $this->post('user_id') :'Guest',
+            'user_id' => $this->post('user_id') ? $this->post('user_id') : 'Guest',
             'remark' => "Order Confirmed By Using COD,  Waiting For Payment",
         );
         $this->db->insert('user_order_status', $order_status_data);
@@ -294,7 +294,7 @@ class Api extends REST_Controller {
 
     function category_get() {
         $cats = [65, 67, 69, 70, 71, 73];
-        $cats = [1,2,3,4,5,6,7,8];
+        $cats = [1, 2, 3, 4, 5, 6, 7, 8];
         $this->config->load('rest', TRUE);
         $this->db->where_in("id", $cats);
         $query = $this->db->get("category");
@@ -453,6 +453,46 @@ class Api extends REST_Controller {
         $response = curl_exec($ch);
         curl_close($ch);
         $this->response($response);
+    }
+
+    public function donationListApi_get() {
+        $draw = intval($this->input->get("draw"));
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+
+        $c_query = "SELECT * "
+                . "FROM `charity_donation` where confirm_status!='Delete' order by id desc";
+
+
+        $querytotal = $this->db->query($c_query);
+
+        $query = "$c_query  limit  $start, $length";
+        $queryfilter = $this->db->query($query);
+        $result_array = $queryfilter->result_array();
+        $return_array = [];
+        foreach ($result_array as $key => $value) {
+            $value["datetime"] = $value["date"] . " ".$value["time"];
+            $value["donate_name"] = "<b>" . $value["name"] . "</b><br/>" . $value["contact_no"] . "<br/>" . $value["email"];
+            $value["anonymous_donation"] = $value["anonymous_donation"] == "true" ? "Yes" : "";
+            if ($value["confirm_status"] == "Confirm") {
+                $value["confirm"] = "";
+                $value["delete"] = "";
+            } else {
+                $value["confirm"] = "<a class='btn btn-success' href='" . site_url("Charity/confirm/" . $value["id"]) . "' title='Confirm Now'><i class='fa fa-check'></i></a>";
+                $value["delete"] = "<a class='btn btn-danger' href='" . site_url("Charity/delete/" . $value["id"]) . "' title='Confirm Now'><i class='fa fa-trash'></i></a>";
+            }
+            array_push($return_array, $value);
+        }
+
+
+        $output = array(
+            "draw" => $draw,
+            "recordsTotal" => $querytotal->num_rows(),
+            "recordsFiltered" => $queryfilter->num_rows(),
+            "data" => $return_array
+        );
+        echo json_encode($output);
+        exit();
     }
 
 }
