@@ -120,7 +120,7 @@ class Charity extends CI_Controller {
     }
 
     function confirm($id) {
-        $this->db->set("confirm_status", "Confirm'");
+        $this->db->set("confirm_status", "Confirm");
         $this->db->where("id", $id);
         $this->db->update("charity_donation");
         redirect(site_url("Charity/reports"));
