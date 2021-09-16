@@ -119,6 +119,20 @@ class Charity extends CI_Controller {
         $this->load->view('donation/reports', $data);
     }
 
+    function confirm($id) {
+        $this->db->set("confirm_status", "Confirm'");
+        $this->db->where("id", $id);
+        $this->db->update("charity_donation");
+        redirect(site_url("Charity/reports"));
+    }
+
+    function delete($id) {
+        $this->db->set("confirm_status", "Delete'");
+        $this->db->where("id", $id);
+        $this->db->update("charity_donation");
+        redirect(site_url("Charity/reports"));
+    }
+
     function thankyouEmail($order_key) {
         $this->db->where("request_id", $order_key);
         $query = $this->db->get("charity_donation");
