@@ -89,7 +89,7 @@ $loyalty_menu = array(
     "icon" => "fa fa-money",
     "active" => "",
     "sub_menu" => array(
-        "Reports" => site_url("Charity/reports"),
+        "Report" => site_url("Charity/reports"),
     ),
 );
 array_push($menu_control, $loyalty_menu);

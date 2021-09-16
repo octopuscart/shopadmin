@@ -108,7 +108,7 @@ $this->load->view('layout/topmenu');
             <div class="widget widget-stats bg-red">
                 <div class="stats-icon"><i class="fa fa-circle-o"></i></div>
                 <div class="stats-info">
-                    <h4>Target Goad</h4>
+                    <h4>Target Goal</h4>
                     <p>{{<?php echo $targetgoal; ?>|currency}}</p>	
                 </div>
                 <!--                <div class="stats-link">
@@ -121,7 +121,7 @@ $this->load->view('layout/topmenu');
             <div class="widget widget-stats bg-green">
                 <div class="stats-icon"><i class="fa fa-refresh"></i></div>
                 <div class="stats-info">
-                    <h4>Remains</h4>
+                    <h4>Remain</h4>
                     <p>{{<?php echo $targetgoal-$total_collection; ?>|currency}}</p>	
                 </div>
                 <!--                <div class="stats-link">
