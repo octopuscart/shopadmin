@@ -127,7 +127,7 @@ class Charity extends CI_Controller {
     }
 
     function delete($id) {
-        $this->db->set("confirm_status", "Delete'");
+        $this->db->set("confirm_status", "Delete");
         $this->db->where("id", $id);
         $this->db->update("charity_donation");
         redirect(site_url("Charity/reports"));
