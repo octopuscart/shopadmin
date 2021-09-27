@@ -1,4 +1,4 @@
-<table id="donationalisttable" class="table table-bordered ">
+<table id="donationalisttable" class="table table-bordered " border="1">
     <thead>
         <tr>
             <th style="width: 50px;">S. N.</th>
