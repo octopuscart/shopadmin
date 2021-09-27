@@ -113,10 +113,57 @@ class Charity extends CI_Controller {
 
         $collectpercent = ($collectamount * 100) / $targetgoal;
 
+        $this->db->order_by("id desc");
+        $this->db->where("confirm_status!=", "Delete");
+        $query = $this->db->get("charity_donation");
+        $requestdata = $query->result_array();
+        $data = array("donation" => $requestdata);
+        $return_array = [];
+        foreach ($requestdata as $key => $value) {
+            $value["datetime"] = $value["date"] . " " . $value["time"];
+            $value["donate_name"] = "<b>" . $value["name"] . "</b><br/>" . $value["contact_no"] . "<br/>" . $value["email"];
+            $value["anonymous_donation"] = $value["anonymous_donation"] == "true" ? "Yes" : "";
+            if ($value["confirm_status"] == "Confirm") {
+                $value["confirm"] = "";
+                $value["delete"] = "";
+            } else {
+                $value["confirm"] = "<a class='btn btn-success' href='" . site_url("Charity/confirm/" . $value["id"]) . "' title='Confirm Now'><i class='fa fa-check'></i></a>";
+                $value["delete"] = "<a class='btn btn-danger' href='" . site_url("Charity/delete/" . $value["id"]) . "' title='Confirm Now'><i class='fa fa-trash'></i></a>";
+            }
+            array_push($return_array, $value);
+        }
+        $data["reportdata"] = $return_array;
         $data["target_achive"] = $collectpercent;
         $data["total_collection"] = $collectamount;
         $data["targetgoal"] = $targetgoal;
         $this->load->view('donation/reports', $data);
+    }
+
+    function reportXls() {
+        $this->db->order_by("id desc");
+        $this->db->where("confirm_status!=", "Delete");
+        $query = $this->db->get("charity_donation");
+        $requestdata = $query->result_array();
+        $return_array = [];
+        foreach ($requestdata as $key => $value) {
+            $value["datetime"] = $value["date"] . " " . $value["time"];
+            $value["donate_name"] = "<b>" . $value["name"] . "</b><br/>" . $value["contact_no"] . "<br/>" . $value["email"];
+            $value["anonymous_donation"] = $value["anonymous_donation"] == "true" ? "Yes" : "";
+            if ($value["confirm_status"] == "Confirm") {
+                $value["confirm"] = "";
+                $value["delete"] = "";
+            } else {
+                $value["confirm"] = "<a class='btn btn-success' href='" . site_url("Charity/confirm/" . $value["id"]) . "' title='Confirm Now'><i class='fa fa-check'></i></a>";
+                $value["delete"] = "<a class='btn btn-danger' href='" . site_url("Charity/delete/" . $value["id"]) . "' title='Confirm Now'><i class='fa fa-trash'></i></a>";
+            }
+            array_push($return_array, $value);
+        }
+        $html = $this->load->view('donation/reportsxls', array("reportdata" => $return_array, "isxls" => false), true);
+//        $filename = 'donation_report_' . $a_date . ".xls";
+//        ob_clean();
+//        header("Content-Disposition: attachment; filename=$filename");
+//        header("Content-Type: application/vnd.ms-excel");
+        echo $html;
     }
 
     function confirm($id) {

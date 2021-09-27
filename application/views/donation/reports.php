@@ -122,7 +122,7 @@ $this->load->view('layout/topmenu');
                 <div class="stats-icon"><i class="fa fa-refresh"></i></div>
                 <div class="stats-info">
                     <h4>Remain</h4>
-                    <p>{{<?php echo $targetgoal-$total_collection; ?>|currency}}</p>	
+                    <p>{{<?php echo $targetgoal - $total_collection; ?>|currency}}</p>	
                 </div>
                 <!--                <div class="stats-link">
                                     <a href="javascript:;">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -133,28 +133,17 @@ $this->load->view('layout/topmenu');
     <div class="col-md-12">
         <div class="panel panel-inverse">
             <div class="panel-heading">
-                <h3 class="panel-title">Donation Reports</h3>
+                <h3 class="panel-title">Donation Reports
+                
+                                <a class="btn btn-danger btn-xs pull-right" href="<?php echo site_url("Charity/reportXls");?>">Export Report</a>
+</h3>
 
             </div>
-            <div class="panel-body">
+            <div class="panel-body" style="overflow-x: auto">
 
-                <table id="donationalisttable" class="table table-bordered ">
-                    <thead>
-                        <tr>
-                            <th style="width: 50px;">ID#</th>
-                            <th style="width:100px;">Name</th>
-                            <th style="width:50px;"> Anonymous</th>
-                            <th style="width: 70px;">Amount</th>
-                            <th style="width: 50px;"> Payment Mode</th>
-                            <th style="width: 200px;">Message</th>
-                            <th style="width: 10px;">Date/Time</th>
-                            <th style="width: 100px;">Status</th>
-                            <th style="width: 100px;">Confirm</th>
-                            <th style="width: 100px;">Remove</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <?php
+                $this->load->view('donation/reportsxls', array("reportdata" => $reportdata, "isxls" => true));
+                ?>
             </div>
         </div>
     </div>
@@ -183,27 +172,7 @@ $this->load->view('layout/footer');
     $(function () {
 
         $('#donationalisttable').DataTable({
-            "processing": true,
-            "serverSide": true,
 
-            "ajax": {
-                url: "<?php echo site_url("Api/donationListApi"); ?>",
-                type: 'GET'
-            },
-            "columns": [
-
-                {"data": "request_id"},
-                {"data": "donate_name"},
-                {"data": "anonymous_donation"},
-                {"data": "amount"},
-                {"data": "payment_type"},
-                {"data": "message"},
-
-                {"data": "datetime"},
-                {"data": "confirm_status"},
-                {"data": "confirm"},
-                {"data": "delete"},
-            ]
         })
     }
     )

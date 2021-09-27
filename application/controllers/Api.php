@@ -469,6 +469,7 @@ class Api extends REST_Controller {
         $query = "$c_query  limit  $start, $length";
         $queryfilter = $this->db->query($query);
         $result_array = $queryfilter->result_array();
+        
         $return_array = [];
         foreach ($result_array as $key => $value) {
             $value["datetime"] = $value["date"] . " ".$value["time"];
