@@ -159,10 +159,10 @@ class Charity extends CI_Controller {
             array_push($return_array, $value);
         }
         $html = $this->load->view('donation/reportsxls', array("reportdata" => $return_array, "isxls" => false), true);
-//        $filename = 'donation_report_' . $a_date . ".xls";
-//        ob_clean();
-//        header("Content-Disposition: attachment; filename=$filename");
-//        header("Content-Type: application/vnd.ms-excel");
+        $filename = 'donation_report_' . $a_date . ".xls";
+        ob_clean();
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: application/vnd.ms-excel");
         echo $html;
     }
 
