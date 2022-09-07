@@ -27,7 +27,20 @@ class CouponManager extends CI_Controller {
         $data['title'] = '';
         $this->load->view('couponManager/couponReport', $data);
     }
-    
+
+    function couponReportMail() {
+        $data = array("resultdata"=>[]);
+        $this->db->where("remark!=''");
+        $this->db->order_by("id desc");
+        $queryresult =  $this->db->get("coupon_request");
+        if($queryresult){
+            $data["resultdata"] = $queryresult->result_array();
+        }
+        
+        $data['title'] = '';
+        $this->load->view('couponManager/couponReportMail', $data);
+    }
+
     function couponUsedReport() {
         $data = array();
         $data['condition'] = 'stockin';
@@ -72,14 +85,10 @@ class CouponManager extends CI_Controller {
         $query2 = $this->db->query($query);
         $productslist = $query2->result_array();
 
-
-
-
         $return_array = array();
         foreach ($productslist as $pkey => $pvalue) {
             $temparray = array();
             $temparray['s_n'] = $pkey + 1;
-
 
             $imageurl = base_url() . "assets/default/default.png";
             if ($pvalue['file_name']) {

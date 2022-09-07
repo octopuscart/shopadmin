@@ -11,7 +11,7 @@ Admin.controller('UseCouponController', function ($scope, $http, $timeout, $inte
             },
             "columns": [
                 {"data": "checkbox"},
-              
+
                 {"data": "sender"},
                 {"data": "receiver"},
                 {"data": "coupon_code"},
@@ -106,6 +106,26 @@ Admin.controller('UseCouponController', function ($scope, $http, $timeout, $inte
 
         })
     }
+})
+
+
+Admin.controller('UseCouponControllerMail', function ($scope, $http, $timeout, $interval, $compile) {
+ 
+    $scope.sendCouponMail = function (request_id, hash_code) {
+        var confirm = window.confirm("Please confirm to send mail.");
+        console.log(request_id, hash_code, confirm);
+        if (confirm) {
+            var url = websiteurl + "Coupon/couponBuyEmail/" + hash_code + "/" + request_id;
+            console.log(url)
+            $http.get(url).then(function (rdata) {
+               window.alert("Email has been sent");
+
+            }, function () {
+
+            })
+        }
+    }
+
 })
 
 
