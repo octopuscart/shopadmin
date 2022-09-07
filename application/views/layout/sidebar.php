@@ -23,8 +23,6 @@ $product_menu = array(
     ),
 );
 
-
-
 if (DEFAULT_PAYMENT == 'No') {
     unset($product_menu['sub_menu']['Items Prices']);
 } else {
@@ -32,7 +30,6 @@ if (DEFAULT_PAYMENT == 'No') {
 }
 
 array_push($menu_control, $product_menu);
-
 
 $order_menu = array(
     "title" => "Order Manegement",
@@ -44,8 +41,6 @@ $order_menu = array(
     ),
 );
 array_push($menu_control, $order_menu);
-
-
 
 $booking_menu = array(
     "title" => "Booking Manegement",
@@ -59,7 +54,6 @@ $booking_menu = array(
 );
 array_push($menu_control, $booking_menu);
 
-
 $coupon_menu = array(
     "title" => "Coupon Management",
     "icon" => "fa fa-gift",
@@ -67,6 +61,7 @@ $coupon_menu = array(
     "sub_menu" => array(
         "Reimburse Coupon" => site_url("CouponManager/couponReport"),
         "Coupon Report" => site_url("CouponManager/couponUsedReport"),
+        "Coupon Mail Send" => site_url("CouponManager/couponReportMail"),
     ),
 );
 array_push($menu_control, $coupon_menu);
@@ -81,8 +76,6 @@ $loyalty_menu = array(
     ),
 );
 array_push($menu_control, $loyalty_menu);
-
-
 
 $loyalty_menu = array(
     "title" => "Donations",
@@ -103,8 +96,6 @@ $client_menu = array(
     ),
 );
 array_push($menu_control, $client_menu);
-
-
 
 $blog_menu = array(
     "title" => "Blog Management",
@@ -164,7 +155,6 @@ $msg_menu = array(
     ),
 );
 
-
 //array_push($menu_control, $msg_menu);
 
 
@@ -179,7 +169,6 @@ $user_menu = array(
     ),
 );
 
-
 //array_push($menu_control, $user_menu);
 
 $setting_menu = array(
@@ -192,10 +181,7 @@ $setting_menu = array(
     ),
 );
 
-
 array_push($menu_control, $setting_menu);
-
-
 
 $social_menu = array(
     "title" => "Social Management",
@@ -207,7 +193,6 @@ $social_menu = array(
 );
 array_push($menu_control, $social_menu);
 
-
 $seo_menu = array(
     "title" => "SEO",
     "icon" => "fa fa-area-chart",
@@ -218,8 +203,6 @@ $seo_menu = array(
     ),
 );
 array_push($menu_control, $seo_menu);
-
-
 
 foreach ($menu_control as $key => $value) {
     $submenu = $value['sub_menu'];

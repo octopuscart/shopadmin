@@ -19,7 +19,7 @@ $this->load->view('layout/topmenu');
     <div class="">
         <div class="panel panel-inverse">
             <div class="panel-heading">
-                <h3 class="panel-title">Coupon Access</h3>
+                <h3 class="panel-title">Coupon Access Mail</h3>
 
             </div>
             <div class="panel-body">
