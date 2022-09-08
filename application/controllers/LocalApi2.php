@@ -7,7 +7,7 @@ class LocalApi2 extends REST_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->API_ACCESS_KEY = 'AAAAYO82HuA:APA91bGPbrV9GXqaEf9VAUfsqEkRhNN66DKpq1MZgr5-tiNwe6X0wwrUxu3fvC4Ik8ioX3vbRU5blNncLQCUjULJkA_KqYnm1pTNpqOlZodvqw6JKnvRsBqwpyjL2ZcECOt7XetXSLqZ';
+        $this->API_ACCESS_KEY = 'AAAAmMsO28A:APA91bEUsd7O5MBIykS3BRRSqDVktrziNjPfvmdMFhKUhlSp3xgp-iReQJ88Fo57ahnZuORo-dqS8jJkmzR2q9CyFgxSly0zFXHektOOxdQsmWTMML8LqivnJyflTuhhWDaKP5zhEuVO';
         // (iOS) Private key's passphrase.
         $this->passphrase = 'joashp';
         // (Windows Phone 8) The name of our push channel.
@@ -356,15 +356,14 @@ class LocalApi2 extends REST_Controller {
             "user_type" => "Admin",
             "datetime" => date("Y-m-d H:i:s a")
         );
-        $this->db->insert('gcm_registration', $regArray);
-//        $this->db->where('reg_id', $reg_id);
-//        $query = $this->db->get('gcm_registration');
-//        $regarray = $query->result_array();
-//        if ($regArray) {
-//            
-//        } else {
-//            $this->db->insert('gcm_registration', $regArray);
-//        }
+        $this->db->where('reg_id', $reg_id);
+        $query = $this->db->get('gcm_registration');
+        $regarray = $query->result_array();
+        if ($regArray) {
+            
+        } else {
+            $this->db->insert('gcm_registration', $regArray);
+        }
         $this->response(array("status" => "done"));
     }
 
