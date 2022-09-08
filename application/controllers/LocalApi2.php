@@ -628,9 +628,8 @@ class LocalApi2 extends REST_Controller {
         $orderdata = $query->row();
         $name = $orderdata->first_name . " " . $orderdata->last_name;
         $email = $orderdata->email;
-        $ordersource = $orderdata->order_source;
-
-        $title = "New Order (#$orderid) From $ordersource";
+        $order_no = $orderdata->order_no;
+        $title = "New Order (#$order_no) From Website";
         $message = "Guest:$name, Email:$email";
 
 
