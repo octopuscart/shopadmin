@@ -577,11 +577,9 @@ class LocalApi2 extends REST_Controller {
     }
 
     function ganarateNotificationForAdmin_get() {
-        header('Content-type: application/json');
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET");
-        header("Access-Control-Allow-Methods: GET, OPTIONS");
-        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        $this->config->load('rest', TRUE);
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 
 
         $this->db->order_by('id', 'desc');
@@ -618,11 +616,9 @@ class LocalApi2 extends REST_Controller {
     }
 
     function newOrderNotification_get($orderid) {
-        header('Content-type: application/json');
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET");
-        header("Access-Control-Allow-Methods: GET, OPTIONS");
-        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
+        $this->config->load('rest', TRUE);
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         $this->db->where('id', $orderid);
         $query = $this->db->get('user_order');
         $orderdata = $query->row();
@@ -640,7 +636,7 @@ class LocalApi2 extends REST_Controller {
             array_push($regid, $value['reg_id']);
         }
         $data = array('title' => $title, "message" => $message);
-        print_r($data);
+   
         echo $this->android($data, $regid);
     }
 
