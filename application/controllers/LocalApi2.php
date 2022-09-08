@@ -355,16 +355,9 @@ class LocalApi2 extends REST_Controller {
         $this->db->where('uuid', $uuid);
         $query = $this->db->get('gcm_registration');
         $regarray = $query->result_array();
-        if ($regarray) {
-            $data = array(
-                "reg_id" => $reg_id
-            );
-            $this->db->set($data);
-            $this->db->where("uuid", $uuid);
-            $this->db->update("gcm_registration");
-        } else {
+        
             $this->db->insert('gcm_registration', $regArray);
-        }
+        
         $this->response(array("status" => "done"));
     }
 
