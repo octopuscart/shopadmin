@@ -359,11 +359,9 @@ class LocalApi2 extends REST_Controller {
         $this->db->where('reg_id', $reg_id);
         $query = $this->db->get('gcm_registration');
         $regarray = $query->result_array();
-        if ($regArray) {
-            
-        } else {
+      
             $this->db->insert('gcm_registration', $regArray);
-        }
+        
         $this->response(array("status" => "done"));
     }
 
