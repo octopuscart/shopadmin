@@ -624,13 +624,13 @@ class LocalApi2 extends REST_Controller {
         header("Access-Control-Allow-Methods: GET, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
         $this->db->where('id', $orderid);
-        $query = $this->db->get('web_order');
+        $query = $this->db->get('user_order');
         $orderdata = $query->row();
         $name = $orderdata->first_name . " " . $orderdata->last_name;
         $email = $orderdata->email;
         $ordersource = $orderdata->order_source;
 
-        $title = "New booking (#$orderid) From $ordersource";
+        $title = "New Order (#$orderid) From $ordersource";
         $message = "Guest:$name, Email:$email";
 
 
