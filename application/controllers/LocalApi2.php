@@ -626,7 +626,7 @@ class LocalApi2 extends REST_Controller {
         $this->db->where('id', $orderid);
         $query = $this->db->get('user_order');
         $orderdata = $query->row();
-        $name = $orderdata->first_name . " " . $orderdata->last_name;
+        $name = $orderdata->name;
         $email = $orderdata->email;
         $order_no = $orderdata->order_no;
         $title = "New Order (#$order_no) From Website";
