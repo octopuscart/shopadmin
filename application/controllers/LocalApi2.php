@@ -352,7 +352,7 @@ class LocalApi2 extends REST_Controller {
             "user_type" => "Admin",
             "datetime" => date("Y-m-d H:i:s a")
         );
-        $this->db->where('reg_id', $reg_id);
+        $this->db->where('uuid', $uuid);
         $query = $this->db->get('gcm_registration');
         $regarray = $query->result_array();
         if ($regArray) {
