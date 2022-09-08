@@ -535,7 +535,7 @@ class LocalApi2 extends REST_Controller {
 
         $fields = array(
             'registration_ids' => $reg_id_array,
-            'data' => $message,
+            'notification' => $message,
         );
 
         return $this->useCurl($url, $headers, json_encode($fields));
