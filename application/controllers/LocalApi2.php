@@ -521,7 +521,7 @@ class LocalApi2 extends REST_Controller {
         $url = 'https://fcm.googleapis.com/fcm/send';
         $message = array(
             'title' => $data['title'],
-            'message' => $data['message'],
+            'body' => $data['message'],
             'subtitle' => '',
             'tickerText' => '',
             'msgcnt' => 1,
@@ -640,7 +640,8 @@ class LocalApi2 extends REST_Controller {
             array_push($regid, $value['reg_id']);
         }
         $data = array('title' => $title, "message" => $message);
-        $this->android($data, $regid);
+        print_r($data);
+        echo $this->android($data, $regid);
     }
 
     function testMsg_get() {
