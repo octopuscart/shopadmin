@@ -213,13 +213,10 @@ class LocalApi2 extends REST_Controller {
         $query = $this->db->get('user_order');
         $order_seen = $query->result_array();
 
-
         $this->db->order_by('id', 'desc');
         $this->db->where('user_type', "");
         $query = $this->db->get('admin_users');
         $userdata = $query->result_array();
-
-
 
         $homedata = array(
             "order_data" => count($order_seen),
@@ -227,7 +224,6 @@ class LocalApi2 extends REST_Controller {
             "total_unseen_order" => count($order_unssen),
             "total_unssen_emails" => "0",
         );
-
 
         header('Content-type: application/json');
         header("Access-Control-Allow-Origin: *");
@@ -359,9 +355,16 @@ class LocalApi2 extends REST_Controller {
         $this->db->where('reg_id', $reg_id);
         $query = $this->db->get('gcm_registration');
         $regarray = $query->result_array();
-      
+        if ($regArray) {
+            $data = array(
+                "reg_id" => $reg_id
+            );
+            $this->db->set($data);
+            $this->db->where("uuid", $uuid);
+            $this->db->update("gcm_registration");
+        } else {
             $this->db->insert('gcm_registration', $regArray);
-        
+        }
         $this->response(array("status" => "done"));
     }
 
@@ -579,14 +582,12 @@ class LocalApi2 extends REST_Controller {
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 
-
         $this->db->order_by('id', 'desc');
         $this->db->where('order_seen', "0");
         $query = $this->db->get('user_order');
         $orderlist = $query->result_array();
 
         $ordercount = count($orderlist);
-
 
         $totalcount = $ordercount + 0;
 
@@ -626,7 +627,6 @@ class LocalApi2 extends REST_Controller {
         $title = "New Order (#$order_no) From Website";
         $message = "Guest:$name, Email:$email";
 
-
         $query = $this->db->get('gcm_registration');
         $gcm_registration = $query->result_array();
         $regid = [];
@@ -634,7 +634,7 @@ class LocalApi2 extends REST_Controller {
             array_push($regid, $value['reg_id']);
         }
         $data = array('title' => $title, "message" => $message);
-   
+
         echo $this->android($data, $regid);
     }
 
